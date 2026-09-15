@@ -1,841 +1,1009 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Dashboard - Desa Sepinggan Gelik</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style.css">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* =====================================================
-           ADMIN DASHBOARD
-        ===================================================== */
+<title>Admin Dashboard - Desa Sepinggan Gelik</title>
 
-        * {
-            box-sizing: border-box;
-        }
+<style>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f8f3;
-            color: #333;
-        }
+*{
+    box-sizing:border-box;
+}
 
-        .admin-header {
-            background: #2e7d32;
-            color: white;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-        }
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7f6;
+    color:#263238;
+}
 
-        .admin-header-inner {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
+/* HEADER */
 
-        .admin-title {
-            margin: 0;
-            font-size: 26px;
-        }
+.header{
+    background:#075e54;
+    color:white;
+    padding:28px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
 
-        .admin-subtitle {
-            margin: 5px 0 0;
-            opacity: 0.9;
-            font-size: 14px;
-        }
+.header h1{
+    margin:0;
+    font-size:32px;
+}
 
-        .admin-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+.header p{
+    margin:8px 0 0;
+    opacity:.9;
+}
 
-        .admin-btn {
-            border: none;
-            padding: 11px 17px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-        }
+.header-buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
 
-        .home-btn {
-            background: white;
-            color: #2e7d32;
-        }
+.header a,
+.header button{
+    border:0;
+    background:white;
+    color:#075e54;
+    padding:12px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .logout-btn {
-            background: #c62828;
-            color: white;
-        }
+/* CONTAINER */
 
-        .admin-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:30px auto;
+}
 
-        /* =====================================================
-           FORM
-        ===================================================== */
+/* PESAN */
 
-        .admin-card {
-            background: white;
-            border-radius: 14px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
+.message{
+    display:none;
+    padding:15px 18px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
 
-        .admin-card h2 {
-            margin-top: 0;
-            color: #2e7d32;
-        }
+.message.success{
+    display:block;
+    background:#dff5e9;
+    color:#087f5b;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
+.message.error{
+    display:block;
+    background:#fde4e4;
+    color:#c62828;
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
+/* FORM */
 
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
+.form-card{
+    background:white;
+    border-radius:14px;
+    padding:28px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
 
-        .form-group label {
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
+.form-card h2{
+    margin-top:0;
+    color:#075e54;
+}
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 14px;
-            font-family: inherit;
-        }
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
 
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
 
-        .form-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+.form-group.full{
+    grid-column:1 / -1;
+}
 
-        .save-btn {
-            background: #2e7d32;
-            color: white;
-        }
+label{
+    font-weight:bold;
+    margin-bottom:7px;
+}
 
-        .cancel-btn {
-            background: #777;
-            color: white;
-        }
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #d6d6d6;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:15px;
+}
 
-        /* =====================================================
-           STATUS
-        ===================================================== */
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
 
-        .status-message {
-            display: none;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:#075e54;
+}
 
-        .status-success {
-            display: block;
-            background: #dff2df;
-            color: #216b21;
-        }
+/* BUTTON */
 
-        .status-error {
-            display: block;
-            background: #fde0e0;
-            color: #a51d1d;
-        }
+.form-buttons{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
 
-        .status-loading {
-            display: block;
-            background: #fff3cd;
-            color: #856404;
-        }
+.btn{
+    border:0;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+}
 
-        /* =====================================================
-           DATA
-        ===================================================== */
+.btn-primary{
+    background:#075e54;
+    color:white;
+}
 
-        .data-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+.btn-secondary{
+    background:#e8eeee;
+    color:#075e54;
+}
 
-        .data-header h2 {
-            margin: 0;
-        }
+.btn-edit{
+    background:#f0a500;
+    color:white;
+}
 
-        .refresh-btn {
-            background: #1976d2;
-            color: white;
-        }
+.btn-delete{
+    background:#c62828;
+    color:white;
+}
 
-        .data-list {
-            display: grid;
-            gap: 18px;
-        }
+/* DATA */
 
-        .data-item {
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 18px;
-            background: #fafafa;
-        }
+.data-card{
+    background:white;
+    border-radius:14px;
+    padding:28px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
 
-        .data-item-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
+.data-card h2{
+    margin-top:0;
+    color:#075e54;
+}
 
-        .data-item h3 {
-            margin: 0;
-            color: #2e7d32;
-        }
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
 
-        .category-badge {
-            background: #2e7d32;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            white-space: nowrap;
-        }
+/* TABLE */
 
-        .data-info {
-            margin: 7px 0;
-            line-height: 1.5;
-        }
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
 
-        .data-info strong {
-            color: #444;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
 
-        .data-image {
-            max-width: 220px;
-            max-height: 160px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: block;
-        }
+th,
+td{
+    text-align:left;
+    padding:13px;
+    border-bottom:1px solid #eee;
+    vertical-align:middle;
+}
 
-        .data-actions {
-            margin-top: 15px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+th{
+    background:#f3f7f6;
+    color:#075e54;
+}
 
-        .edit-btn {
-            background: #f9a825;
-            color: white;
-        }
+.data-image{
+    width:80px;
+    height:60px;
+    object-fit:cover;
+    border-radius:7px;
+    background:#eee;
+}
 
-        .delete-btn {
-            background: #d32f2f;
-            color: white;
-        }
+.action-buttons{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
 
-        .empty-data {
-            text-align: center;
-            padding: 35px 15px;
-            color: #777;
-        }
+/* MOBILE */
 
-        .loading-data {
-            text-align: center;
-            padding: 35px;
-            color: #777;
-        }
+@media(max-width:700px){
 
-        /* =====================================================
-           DARK MODE
-        ===================================================== */
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-        body.dark {
-            background: #121212;
-            color: #eee;
-        }
+    .header h1{
+        font-size:25px;
+    }
 
-        body.dark .admin-card {
-            background: #1e1e1e;
-            color: #eee;
-        }
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-        body.dark .data-item {
-            background: #252525;
-            border-color: #444;
-        }
+    .form-group.full{
+        grid-column:auto;
+    }
 
-        body.dark .form-group input,
-        body.dark .form-group select,
-        body.dark .form-group textarea {
-            background: #2b2b2b;
-            color: white;
-            border-color: #555;
-        }
+    .container{
+        width:94%;
+    }
 
-        body.dark .data-info strong {
-            color: #ddd;
-        }
+}
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
+</style>
 
-        @media (max-width: 768px) {
-
-            .admin-header-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full {
-                grid-column: auto;
-            }
-
-            .data-item-header {
-                flex-direction: column;
-            }
-
-            .admin-container {
-                padding: 0 12px;
-            }
-
-            .admin-card {
-                padding: 18px;
-            }
-        }
-    </style>
 </head>
+
 
 <body>
 
-    <!-- =====================================================
-         HEADER ADMIN
-    ===================================================== -->
 
-    <header class="admin-header">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <div class="admin-header-inner">
+<header class="header">
 
-            <div>
-                <h1 class="admin-title">
-                    🌿 Admin Dashboard
-                </h1>
+    <div>
 
-                <p class="admin-subtitle">
-                    Desa Sepinggan Gelik
-                </p>
+        <h1>🌿 Admin Dashboard</h1>
+
+        <p>
+            Desa Sepinggan Gelik
+        </p>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+        <a href="index.html">
+            🏠 Beranda
+        </a>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTAINER
+===================================================== -->
+
+<main class="container">
+
+
+    <div id="message"
+         class="message">
+    </div>
+
+
+
+    <!-- =================================================
+         FORM
+    ================================================= -->
+
+    <section class="form-card">
+
+        <h2 id="formTitle">
+            ➕ Tambah Data Desa
+        </h2>
+
+
+        <form id="dataForm">
+
+
+            <input
+                type="hidden"
+                id="dataId"
+            >
+
+
+            <div class="form-grid">
+
+
+                <!-- NAMA -->
+
+                <div class="form-group">
+
+                    <label for="nama">
+                        Nama
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- JUDUL -->
+
+                <div class="form-group">
+
+                    <label for="judul">
+                        Judul
+                    </label>
+
+                    <input
+                        type="text"
+                        id="judul"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- KATEGORI -->
+
+                <div class="form-group">
+
+                    <label for="kategori">
+                        Kategori
+                    </label>
+
+                    <select
+                        id="kategori"
+                        required
+                    >
+
+                        <option value="">
+                            -- Pilih Kategori --
+                        </option>
+
+                        <option value="Beranda">
+                            Beranda
+                        </option>
+
+                        <option value="Profil Desa">
+                            Profil Desa
+                        </option>
+
+                        <option value="Keindahan">
+                            Keindahan
+                        </option>
+
+                        <option value="Kegiatan">
+                            Kegiatan
+                        </option>
+
+                        <option value="Lokasi">
+                            Lokasi
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TANGGAL -->
+
+                <div class="form-group">
+
+                    <label for="tanggal">
+                        Tanggal
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tanggal"
+                    >
+
+                </div>
+
+
+
+                <!-- DESKRIPSI -->
+
+                <div class="form-group full">
+
+                    <label for="deskripsi">
+                        Deskripsi
+                    </label>
+
+                    <textarea
+                        id="deskripsi"
+                        placeholder="Tuliskan deskripsi..."
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- GAMBAR -->
+
+                <div class="form-group full">
+
+                    <label for="urlGambar">
+                        URL Gambar
+                    </label>
+
+                    <input
+                        type="url"
+                        id="urlGambar"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
             </div>
 
-            <div class="admin-buttons">
 
-                <a href="index.html"
-                   class="admin-btn home-btn">
-                    🏠 Beranda
-                </a>
+
+            <!-- BUTTON -->
+
+            <div class="form-buttons">
 
                 <button
-                    type="button"
-                    class="admin-btn logout-btn"
-                    id="logoutBtn">
-                    🚪 Logout
+                    type="submit"
+                    class="btn btn-primary"
+                    id="saveButton"
+                >
+                    💾 Simpan Data
                 </button>
 
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         CONTAINER
-    ===================================================== -->
-
-    <main class="admin-container">
-
-        <!-- STATUS -->
-
-        <div
-            id="statusMessage"
-            class="status-message">
-        </div>
-
-
-        <!-- =================================================
-             FORM TAMBAH / EDIT
-        ================================================= -->
-
-        <section class="admin-card">
-
-            <h2 id="formTitle">
-                ➕ Tambah Data Desa
-            </h2>
-
-            <form id="dataForm">
-
-                <!-- ID TERSEMBUNYI -->
-
-                <input
-                    type="hidden"
-                    id="dataId"
-                    value="">
-
-
-                <div class="form-grid">
-
-                    <!-- NAMA -->
-
-                    <div class="form-group">
-
-                        <label for="nama">
-                            Nama
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nama"
-                            name="nama"
-                            placeholder="Masukkan nama"
-                            required>
-
-                    </div>
-
-
-                    <!-- JUDUL -->
-
-                    <div class="form-group">
-
-                        <label for="judul">
-                            Judul
-                        </label>
-
-                        <input
-                            type="text"
-                            id="judul"
-                            name="judul"
-                            placeholder="Masukkan judul"
-                            required>
-
-                    </div>
-
-
-                    <!-- KATEGORI -->
-
-                    <div class="form-group">
-
-                        <label for="kategori">
-                            Kategori
-                        </label>
-
-                        <select
-                            id="kategori"
-                            name="kategori"
-                            required>
-
-                            <option value="">
-                                -- Pilih Kategori --
-                            </option>
-
-                            <option value="Beranda">
-                                Beranda
-                            </option>
-
-                            <option value="Profil Desa">
-                                Profil Desa
-                            </option>
-
-                            <option value="Keindahan">
-                                Keindahan
-                            </option>
-
-                            <option value="Kegiatan">
-                                Kegiatan
-                            </option>
-
-                            <option value="Lokasi">
-                                Lokasi
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- TANGGAL -->
-
-                    <div class="form-group">
-
-                        <label for="tanggal">
-                            Tanggal
-                        </label>
-
-                        <input
-                            type="date"
-                            id="tanggal"
-                            name="tanggal">
-
-                    </div>
-
-
-                    <!-- DESKRIPSI -->
-
-                    <div class="form-group full">
-
-                        <label for="deskripsi">
-                            Deskripsi
-                        </label>
-
-                        <textarea
-                            id="deskripsi"
-                            name="deskripsi"
-                            placeholder="Masukkan deskripsi"></textarea>
-
-                    </div>
-
-
-                    <!-- URL GAMBAR -->
-
-                    <div class="form-group full">
-
-                        <label for="urlGambar">
-                            URL Gambar
-                        </label>
-
-                        <input
-                            type="url"
-                            id="urlGambar"
-                            name="urlGambar"
-                            placeholder="https://contoh.com/gambar.jpg">
-
-                    </div>
-
-                </div>
-
-
-                <!-- FORM ACTION -->
-
-                <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        class="admin-btn save-btn"
-                        id="saveBtn">
-
-                        💾 Simpan Data
-
-                    </button>
-
-                    <button
-                        type="button"
-                        class="admin-btn cancel-btn"
-                        id="cancelBtn"
-                        style="display:none;">
-
-                        ❌ Batal Edit
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-
-        <!-- =================================================
-             DAFTAR DATA
-        ================================================= -->
-
-        <section class="admin-card">
-
-            <div class="data-header">
-
-                <h2>
-                    📋 Data Desa
-                </h2>
 
                 <button
                     type="button"
-                    class="admin-btn refresh-btn"
-                    id="refreshBtn">
-
-                    🔄 Muat Ulang
-
+                    class="btn btn-secondary"
+                    id="cancelButton"
+                    onclick="resetForm()"
+                    style="display:none;"
+                >
+                    ❌ Batal Edit
                 </button>
 
             </div>
 
 
-            <div
-                id="dataList"
-                class="data-list">
+        </form>
 
-                <div class="loading-data">
-                    Memuat data...
-                </div>
+    </section>
 
+
+
+    <!-- =================================================
+         DATA
+    ================================================= -->
+
+    <section class="data-card">
+
+        <h2>
+            📋 Data Desa
+        </h2>
+
+
+        <div id="dataList">
+
+            <div class="loading">
+                Memuat data...
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <!-- =====================================================
-         CONFIG DATABASE
-    ===================================================== -->
-
-    <script src="config.js"></script>
+    </section>
 
 
-    <!-- =====================================================
-         SCRIPT ADMIN
-    ===================================================== -->
-
-    <script>
-
-        /* =====================================================
-           CEK CONFIG
-        ===================================================== */
-
-        const WEB_URL =
-            typeof WEB_APP_URL !== "undefined"
-                ? WEB_APP_URL
-                : "";
+</main>
 
 
-        /* =====================================================
-           ELEMENT
-        ===================================================== */
 
-        const dataForm =
-            document.getElementById("dataForm");
+<script>
 
-        const dataId =
-            document.getElementById("dataId");
+/* =====================================================
+   URL GOOGLE APPS SCRIPT
+===================================================== */
 
-        const nama =
-            document.getElementById("nama");
-
-        const judul =
-            document.getElementById("judul");
-
-        const kategori =
-            document.getElementById("kategori");
-
-        const deskripsi =
-            document.getElementById("deskripsi");
-
-        const urlGambar =
-            document.getElementById("urlGambar");
-
-        const tanggal =
-            document.getElementById("tanggal");
-
-        const dataList =
-            document.getElementById("dataList");
-
-        const statusMessage =
-            document.getElementById("statusMessage");
-
-        const formTitle =
-            document.getElementById("formTitle");
-
-        const saveBtn =
-            document.getElementById("saveBtn");
-
-        const cancelBtn =
-            document.getElementById("cancelBtn");
-
-        const refreshBtn =
-            document.getElementById("refreshBtn");
-
-        const logoutBtn =
-            document.getElementById("logoutBtn");
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbzN1j6Bhyy8_RZTvsK-aPzVNxKlG0JPtqLNzhJueziXDvt0isxag3VrTkiwtzxn1fU/exec";
 
 
-        /* =====================================================
-           TOKEN LOGIN
-        ===================================================== */
+/* =====================================================
+   ELEMENT
+===================================================== */
 
-        const token =
-            sessionStorage.getItem("desaAdminToken");
+const dataForm =
+    document.getElementById("dataForm");
+
+const dataId =
+    document.getElementById("dataId");
+
+const nama =
+    document.getElementById("nama");
+
+const judul =
+    document.getElementById("judul");
+
+const kategori =
+    document.getElementById("kategori");
+
+const deskripsi =
+    document.getElementById("deskripsi");
+
+const urlGambar =
+    document.getElementById("urlGambar");
+
+const tanggal =
+    document.getElementById("tanggal");
+
+const dataList =
+    document.getElementById("dataList");
+
+const message =
+    document.getElementById("message");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+const cancelButton =
+    document.getElementById("cancelButton");
 
 
-        /* =====================================================
-           JIKA BELUM LOGIN
-        ===================================================== */
+/* =====================================================
+   TOKEN
+===================================================== */
 
-        if (!token) {
+let token =
+    sessionStorage.getItem("desaAdminToken");
 
-            window.location.href =
-                "admin-login.html";
+
+/* =====================================================
+   CEK LOGIN
+===================================================== */
+
+if (!token) {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+/* =====================================================
+   PESAN
+===================================================== */
+
+function showMessage(text, type){
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function loadData(){
+
+    dataList.innerHTML =
+        '<div class="loading">Memuat data...</div>';
+
+    try{
+
+        const response =
+            await fetch(
+                WEB_APP_URL + "?action=list"
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " + response.status
+            );
+
+        }
+
+        const result =
+            await response.json();
+
+        if(
+            !result ||
+            result.success !== true
+        ){
+
+            throw new Error(
+                result.message ||
+                "Gagal mengambil data."
+            );
+
+        }
+
+        renderData(result.data || []);
+
+    }
+    catch(error){
+
+        dataList.innerHTML =
+            '<div class="loading">' +
+            'Gagal memuat data: ' +
+            escapeHtml(error.message) +
+            '</div>';
+
+    }
+
+}
+
+
+/* =====================================================
+   RENDER DATA
+===================================================== */
+
+function renderData(data){
+
+    if(!data.length){
+
+        dataList.innerHTML =
+            '<div class="loading">' +
+            'Belum ada data.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="table-wrapper">
+
+        <table>
+
+        <thead>
+
+            <tr>
+
+                <th>No</th>
+
+                <th>Nama</th>
+
+                <th>Judul</th>
+
+                <th>Kategori</th>
+
+                <th>Deskripsi</th>
+
+                <th>Gambar</th>
+
+                <th>Tanggal</th>
+
+                <th>Aksi</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+
+    data.forEach(function(item,index){
+
+        let image = "-";
+
+
+        if(item.urlGambar){
+
+            image = `
+
+                <img
+                    src="${escapeHtml(item.urlGambar)}"
+                    class="data-image"
+                    alt="Gambar"
+                    onerror="this.style.display='none'"
+                >
+
+            `;
 
         }
 
 
-        /* =====================================================
-           STATUS MESSAGE
-        ===================================================== */
+        html += `
 
-        function showStatus(message, type) {
+            <tr>
 
-            statusMessage.textContent =
-                message;
+                <td>
+                    ${index + 1}
+                </td>
 
-            statusMessage.className =
-                "status-message";
+                <td>
+                    ${escapeHtml(item.nama)}
+                </td>
 
-            if (type === "success") {
+                <td>
+                    ${escapeHtml(item.judul)}
+                </td>
 
-                statusMessage.classList.add(
-                    "status-success"
-                );
+                <td>
+                    ${escapeHtml(item.kategori)}
+                </td>
 
-            }
+                <td>
+                    ${escapeHtml(item.deskripsi)}
+                </td>
 
-            else if (type === "error") {
+                <td>
+                    ${image}
+                </td>
 
-                statusMessage.classList.add(
-                    "status-error"
-                );
+                <td>
+                    ${escapeHtml(item.tanggal)}
+                </td>
 
-            }
+                <td>
 
-            else {
+                    <div class="action-buttons">
 
-                statusMessage.classList.add(
-                    "status-loading"
-                );
+                        <button
+                            class="btn btn-edit"
+                            onclick='editData(${JSON.stringify(item)})'
+                        >
+                            ✏️ Edit
+                        </button>
 
-            }
+                        <button
+                            class="btn btn-delete"
+                            onclick="deleteData('${escapeHtml(item.id)}')"
+                        >
+                            🗑️ Hapus
+                        </button>
 
-        }
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
 
 
-        function hideStatus() {
+    html += `
 
-            statusMessage.textContent = "";
+        </tbody>
 
-            statusMessage.className =
-                "status-message";
+        </table>
 
-        }
+        </div>
+
+    `;
 
 
-        /* =====================================================
-           API POST
-        ===================================================== */
+    dataList.innerHTML = html;
 
-        async function apiPost(action, data = {}) {
+}
 
-            if (!WEB_URL) {
 
-                throw new Error(
-                    "WEB_APP_URL belum diatur di config.js"
-                );
+/* =====================================================
+   EDIT DATA
+===================================================== */
 
-            }
+function editData(item){
 
+    dataId.value =
+        item.id || "";
+
+    nama.value =
+        item.nama || "";
+
+    judul.value =
+        item.judul || "";
+
+    kategori.value =
+        item.kategori || "";
+
+    deskripsi.value =
+        item.deskripsi || "";
+
+    urlGambar.value =
+        item.urlGambar || "";
+
+    tanggal.value =
+        item.tanggal || "";
+
+
+    formTitle.textContent =
+        "✏️ Edit Data Desa";
+
+    saveButton.textContent =
+        "💾 Simpan Perubahan";
+
+    cancelButton.style.display =
+        "inline-block";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =====================================================
+   SUBMIT FORM
+===================================================== */
+
+dataForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const id =
+            dataId.value.trim();
+
+
+        const action =
+            id ? "update" : "create";
+
+
+        saveButton.disabled =
+            true;
+
+        saveButton.textContent =
+            "⏳ Menyimpan...";
+
+
+        try{
 
             const params =
                 new URLSearchParams();
 
-            params.append(
+
+            params.set(
                 "action",
                 action
             );
 
 
-            if (token) {
+            params.set(
+                "token",
+                token
+            );
 
-                params.append(
-                    "token",
-                    token
+
+            if(id){
+
+                params.set(
+                    "id",
+                    id
                 );
 
             }
 
 
-            Object.keys(data).forEach(
-                key => {
+            params.set(
+                "nama",
+                nama.value
+            );
 
-                    if (
-                        data[key] !== undefined &&
-                        data[key] !== null
-                    ) {
+            params.set(
+                "judul",
+                judul.value
+            );
 
-                        params.append(
-                            key,
-                            data[key]
-                        );
+            params.set(
+                "kategori",
+                kategori.value
+            );
 
-                    }
+            params.set(
+                "deskripsi",
+                deskripsi.value
+            );
 
-                }
+            params.set(
+                "urlGambar",
+                urlGambar.value
+            );
+
+            params.set(
+                "tanggal",
+                tanggal.value
             );
 
 
             const response =
                 await fetch(
-                    WEB_URL,
-                    {
-                        method: "POST",
-                        body: params
-                    }
+                    WEB_APP_URL +
+                    "?" +
+                    params.toString()
                 );
 
 
-            if (!response.ok) {
+            if(!response.ok){
 
                 throw new Error(
-                    "Server mengembalikan error HTTP " +
+                    "HTTP " +
                     response.status
                 );
 
@@ -846,917 +1014,229 @@
                 await response.json();
 
 
-            return result;
+            if(!result.success){
 
-        }
-
-
-        /* =====================================================
-           LOAD DATA
-        ===================================================== */
-
-        async function loadData() {
-
-            dataList.innerHTML = `
-                <div class="loading-data">
-                    ⏳ Memuat data dari database...
-                </div>
-            `;
-
-
-            try {
-
-                if (!WEB_URL) {
-
-                    throw new Error(
-                        "WEB_APP_URL belum tersedia."
-                    );
-
-                }
-
-
-                const response =
-                    await fetch(
-                        WEB_URL +
-                        "?action=list"
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "HTTP Error " +
-                        response.status
-                    );
-
-                }
-
-
-                const result =
-                    await response.json();
-
-
-                if (!result.success) {
-
-                    throw new Error(
-                        result.message ||
-                        "Gagal mengambil data."
-                    );
-
-                }
-
-
-                const data =
-                    Array.isArray(result.data)
-                        ? result.data
-                        : [];
-
-
-                renderData(data);
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "LOAD DATA ERROR:",
-                    error
+                throw new Error(
+                    result.message ||
+                    "Data gagal disimpan."
                 );
 
-
-                dataList.innerHTML = `
-                    <div class="empty-data">
-
-                        ❌ Gagal memuat data.
-
-                        <br><br>
-
-                        ${escapeHtml(
-                            error.message
-                        )}
-
-                        <br><br>
-
-                        <button
-                            class="admin-btn refresh-btn"
-                            onclick="loadData()">
-
-                            🔄 Coba Lagi
-
-                        </button>
-
-                    </div>
-                `;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           RENDER DATA
-        ===================================================== */
-
-        function renderData(data) {
-
-            if (!data || data.length === 0) {
-
-                dataList.innerHTML = `
-                    <div class="empty-data">
-
-                        📭 Belum ada data di database.
-
-                    </div>
-                `;
-
-                return;
-
             }
 
 
-            dataList.innerHTML =
-                data.map(item => {
-
-                    /*
-                     * PENTING:
-                     * Code.gs mengirim data dengan nama:
-                     *
-                     * id
-                     * nama
-                     * judul
-                     * kategori
-                     * deskripsi
-                     * urlGambar
-                     * tanggal
-                     *
-                     * Jadi JANGAN menggunakan:
-                     * item.NAMA
-                     * item.JUDUL
-                     * dll.
-                     */
+            showMessage(
+                id
+                ? "Data berhasil diperbarui."
+                : "Data berhasil ditambahkan.",
+                "success"
+            );
 
 
-                    const id =
-                        item.id ?? "";
+            resetForm();
 
-                    const namaData =
-                        item.nama ?? "-";
+            await loadData();
 
-                    const judulData =
-                        item.judul ?? "-";
-
-                    const kategoriData =
-                        item.kategori ?? "-";
-
-                    const deskripsiData =
-                        item.deskripsi ?? "-";
-
-                    const urlData =
-                        item.urlGambar ?? "";
-
-                    const tanggalData =
-                        item.tanggal ?? "-";
-
-
-                    let imageHTML = "";
-
-
-                    if (urlData) {
-
-                        imageHTML = `
-                            <img
-                                src="${escapeAttribute(urlData)}"
-                                alt="${escapeAttribute(judulData)}"
-                                class="data-image"
-                                onerror="this.style.display='none';">
-                        `;
-
-                    }
-
-
-                    return `
-
-                        <article
-                            class="data-item">
-
-                            <div
-                                class="data-item-header">
-
-                                <h3>
-                                    ${escapeHtml(
-                                        judulData
-                                    )}
-                                </h3>
-
-                                <span
-                                    class="category-badge">
-
-                                    ${escapeHtml(
-                                        kategoriData
-                                    )}
-
-                                </span>
-
-                            </div>
-
-
-                            <div class="data-info">
-
-                                <strong>
-                                    Nama:
-                                </strong>
-
-                                ${escapeHtml(
-                                    namaData
-                                )}
-
-                            </div>
-
-
-                            <div class="data-info">
-
-                                <strong>
-                                    Deskripsi:
-                                </strong>
-
-                                ${escapeHtml(
-                                    deskripsiData
-                                )}
-
-                            </div>
-
-
-                            <div class="data-info">
-
-                                <strong>
-                                    Tanggal:
-                                </strong>
-
-                                ${escapeHtml(
-                                    tanggalData
-                                )}
-
-                            </div>
-
-
-                            ${
-                                urlData
-                                ? `
-                                    <div class="data-info">
-
-                                        <strong>
-                                            Gambar:
-                                        </strong>
-
-                                        <br>
-
-                                        <a
-                                            href="${escapeAttribute(urlData)}"
-                                            target="_blank"
-                                            rel="noopener noreferrer">
-
-                                            Lihat gambar
-
-                                        </a>
-
-                                        ${imageHTML}
-
-                                    </div>
-                                `
-                                : ""
-                            }
-
-
-                            <div class="data-actions">
-
-                                <button
-                                    type="button"
-                                    class="admin-btn edit-btn"
-                                    onclick='editData(${JSON.stringify(item)})'>
-
-                                    ✏️ Edit
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    class="admin-btn delete-btn"
-                                    onclick='deleteData("${escapeJs(id)}")'>
-
-                                    🗑️ Hapus
-
-                                </button>
-
-                            </div>
-
-                        </article>
-
-                    `;
-
-                }).join("");
 
         }
+        catch(error){
 
-
-        /* =====================================================
-           EDIT DATA
-        ===================================================== */
-
-        function editData(item) {
-
-            /*
-             * Menggunakan camelCase sesuai Code.gs
-             */
-
-            dataId.value =
-                item.id ?? "";
-
-            nama.value =
-                item.nama ?? "";
-
-            judul.value =
-                item.judul ?? "";
-
-            kategori.value =
-                item.kategori ?? "";
-
-            deskripsi.value =
-                item.deskripsi ?? "";
-
-            urlGambar.value =
-                item.urlGambar ?? "";
-
-            tanggal.value =
-                formatDateForInput(
-                    item.tanggal
-                );
-
-
-            formTitle.textContent =
-                "✏️ Edit Data Desa";
-
-            saveBtn.textContent =
-                "💾 Simpan Perubahan";
-
-            cancelBtn.style.display =
-                "inline-block";
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            showMessage(
+                "Gagal menyimpan data: " +
+                error.message,
+                "error"
+            );
 
         }
+        finally{
 
+            saveButton.disabled =
+                false;
 
-        /* =====================================================
-           CANCEL EDIT
-        ===================================================== */
-
-        cancelBtn.addEventListener(
-            "click",
-            resetForm
-        );
-
-
-        function resetForm() {
-
-            dataForm.reset();
-
-            dataId.value = "";
-
-            formTitle.textContent =
-                "➕ Tambah Data Desa";
-
-            saveBtn.textContent =
+            saveButton.textContent =
                 "💾 Simpan Data";
 
-            cancelBtn.style.display =
-                "none";
-
         }
 
-
-        /* =====================================================
-           SUBMIT FORM
-        ===================================================== */
-
-        dataForm.addEventListener(
-            "submit",
-            async function(event) {
-
-                event.preventDefault();
+    }
+);
 
 
-                const id =
-                    dataId.value.trim();
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm(){
+
+    dataForm.reset();
+
+    dataId.value = "";
+
+    formTitle.textContent =
+        "➕ Tambah Data Desa";
+
+    saveButton.textContent =
+        "💾 Simpan Data";
+
+    cancelButton.style.display =
+        "none";
+
+}
 
 
-                const data = {
+/* =====================================================
+   DELETE DATA
+===================================================== */
 
-                    nama:
-                        nama.value.trim(),
+async function deleteData(id){
 
-                    judul:
-                        judul.value.trim(),
+    if(!confirm(
+        "Apakah kamu yakin ingin menghapus data ini?"
+    )){
 
-                    kategori:
-                        kategori.value.trim(),
+        return;
 
-                    deskripsi:
-                        deskripsi.value.trim(),
-
-                    urlGambar:
-                        urlGambar.value.trim(),
-
-                    tanggal:
-                        tanggal.value.trim()
-
-                };
+    }
 
 
-                try {
+    try{
 
-                    saveBtn.disabled = true;
+        const params =
+            new URLSearchParams();
 
-                    saveBtn.textContent =
-                        "⏳ Menyimpan...";
+        params.set(
+            "action",
+            "delete"
+        );
 
+        params.set(
+            "token",
+            token
+        );
 
-                    showStatus(
-                        "⏳ Menyimpan data...",
-                        "loading"
-                    );
-
-
-                    let result;
-
-
-                    if (id) {
-
-                        /*
-                         * EDIT
-                         */
-
-                        result =
-                            await apiPost(
-                                "update",
-                                {
-                                    id: id,
-                                    ...data
-                                }
-                            );
-
-                    }
-
-                    else {
-
-                        /*
-                         * TAMBAH
-                         */
-
-                        result =
-                            await apiPost(
-                                "create",
-                                data
-                            );
-
-                    }
-
-
-                    if (!result.success) {
-
-                        throw new Error(
-                            result.message ||
-                            "Data gagal disimpan."
-                        );
-
-                    }
-
-
-                    showStatus(
-                        result.message ||
-                        "Data berhasil disimpan.",
-                        "success"
-                    );
-
-
-                    resetForm();
-
-
-                    await loadData();
-
-
-                    setTimeout(
-                        hideStatus,
-                        3000
-                    );
-
-                }
-
-                catch (error) {
-
-                    console.error(
-                        "SAVE ERROR:",
-                        error
-                    );
-
-
-                    showStatus(
-                        "❌ " +
-                        error.message,
-                        "error"
-                    );
-
-                }
-
-                finally {
-
-                    saveBtn.disabled =
-                        false;
-
-                    saveBtn.textContent =
-                        dataId.value
-                            ? "💾 Simpan Perubahan"
-                            : "💾 Simpan Data";
-
-                }
-
-            }
+        params.set(
+            "id",
+            id
         );
 
 
-        /* =====================================================
-           DELETE DATA
-        ===================================================== */
-
-        async function deleteData(id) {
-
-            if (!id) {
-
-                alert(
-                    "ID data tidak ditemukan."
-                );
-
-                return;
-
-            }
-
-
-            const yakin =
-                confirm(
-                    "Apakah kamu yakin ingin menghapus data ini?"
-                );
-
-
-            if (!yakin) {
-
-                return;
-
-            }
-
-
-            try {
-
-                showStatus(
-                    "⏳ Menghapus data...",
-                    "loading"
-                );
-
-
-                const result =
-                    await apiPost(
-                        "delete",
-                        {
-                            id: id
-                        }
-                    );
-
-
-                if (!result.success) {
-
-                    throw new Error(
-                        result.message ||
-                        "Data gagal dihapus."
-                    );
-
-                }
-
-
-                showStatus(
-                    result.message ||
-                    "Data berhasil dihapus.",
-                    "success"
-                );
-
-
-                await loadData();
-
-
-                setTimeout(
-                    hideStatus,
-                    3000
-                );
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "DELETE ERROR:",
-                    error
-                );
-
-
-                showStatus(
-                    "❌ " +
-                    error.message,
-                    "error"
-                );
-
-            }
-
-        }
-
-
-        /* =====================================================
-           REFRESH
-        ===================================================== */
-
-        refreshBtn.addEventListener(
-            "click",
-            async function() {
-
-                showStatus(
-                    "⏳ Memuat ulang data...",
-                    "loading"
-                );
-
-                await loadData();
-
-                showStatus(
-                    "✅ Data berhasil dimuat ulang.",
-                    "success"
-                );
-
-                setTimeout(
-                    hideStatus,
-                    2000
-                );
-
-            }
-        );
-
-
-        /* =====================================================
-           LOGOUT
-        ===================================================== */
-
-        logoutBtn.addEventListener(
-            "click",
-            async function() {
-
-                const yakin =
-                    confirm(
-                        "Apakah kamu yakin ingin logout?"
-                    );
-
-
-                if (!yakin) {
-
-                    return;
-
-                }
-
-
-                try {
-
-                    /*
-                     * Memberitahu server bahwa token logout.
-                     */
-
-                    await apiPost(
-                        "logout"
-                    );
-
-                }
-
-                catch (error) {
-
-                    console.warn(
-                        "Logout server:",
-                        error
-                    );
-
-                }
-
-
-                /*
-                 * Hapus login dari browser.
-                 */
-
-                sessionStorage.removeItem(
-                    "desaAdminToken"
-                );
-
-                sessionStorage.removeItem(
-                    "desaAdminLogin"
-                );
-
-
-                /*
-                 * Kembali ke BERANDA.
-                 * Dari beranda nanti bisa klik
-                 * LOGIN ADMIN lagi.
-                 */
-
-                window.location.href =
-                    "index.html";
-
-            }
-        );
-
-
-        /* =====================================================
-           ESCAPE HTML
-        ===================================================== */
-
-        function escapeHtml(value) {
-
-            if (
-                value === null ||
-                value === undefined
-            ) {
-
-                return "";
-
-            }
-
-
-            return String(value)
-                .replace(
-                    /&/g,
-                    "&amp;"
-                )
-                .replace(
-                    /</g,
-                    "&lt;"
-                )
-                .replace(
-                    />/g,
-                    "&gt;"
-                )
-                .replace(
-                    /"/g,
-                    "&quot;"
-                )
-                .replace(
-                    /'/g,
-                    "&#039;"
-                );
-
-        }
-
-
-        /* =====================================================
-           ESCAPE ATTRIBUTE
-        ===================================================== */
-
-        function escapeAttribute(value) {
-
-            return escapeHtml(value);
-
-        }
-
-
-        /* =====================================================
-           ESCAPE JAVASCRIPT
-        ===================================================== */
-
-        function escapeJs(value) {
-
-            if (
-                value === null ||
-                value === undefined
-            ) {
-
-                return "";
-
-            }
-
-
-            return String(value)
-                .replace(
-                    /\\/g,
-                    "\\\\"
-                )
-                .replace(
-                    /"/g,
-                    '\\"'
-                )
-                .replace(
-                    /'/g,
-                    "\\'"
-                )
-                .replace(
-                    /\r/g,
-                    "\\r"
-                )
-                .replace(
-                    /\n/g,
-                    "\\n"
-                );
-
-        }
-
-
-        /* =====================================================
-           FORMAT TANGGAL
-        ===================================================== */
-
-        function formatDateForInput(value) {
-
-            if (!value) {
-
-                return "";
-
-            }
-
-
-            /*
-             * Jika sudah YYYY-MM-DD
-             */
-
-            if (
-                /^\d{4}-\d{2}-\d{2}$/.test(
-                    String(value)
-                )
-            ) {
-
-                return String(value);
-
-            }
-
-
-            /*
-             * Coba ubah dari format tanggal lain.
-             */
-
-            const date =
-                new Date(value);
-
-
-            if (
-                Number.isNaN(
-                    date.getTime()
-                )
-            ) {
-
-                return "";
-
-            }
-
-
-            const year =
-                date.getFullYear();
-
-            const month =
-                String(
-                    date.getMonth() + 1
-                ).padStart(
-                    2,
-                    "0"
-                );
-
-            const day =
-                String(
-                    date.getDate()
-                ).padStart(
-                    2,
-                    "0"
-                );
-
-
-            return (
-                year +
-                "-" +
-                month +
-                "-" +
-                day
+        const response =
+            await fetch(
+                WEB_APP_URL +
+                "?" +
+                params.toString()
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP " +
+                response.status
             );
 
         }
 
 
-        /* =====================================================
-           MULAI
-        ===================================================== */
+        const result =
+            await response.json();
 
-        loadData();
 
-    </script>
+        if(!result.success){
+
+            throw new Error(
+                result.message ||
+                "Data gagal dihapus."
+            );
+
+        }
+
+
+        showMessage(
+            "Data berhasil dihapus.",
+            "success"
+        );
+
+
+        await loadData();
+
+
+    }
+    catch(error){
+
+        showMessage(
+            "Gagal menghapus data: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout(){
+
+    try{
+
+        if(token){
+
+            const params =
+                new URLSearchParams();
+
+            params.set(
+                "action",
+                "logout"
+            );
+
+            params.set(
+                "token",
+                token
+            );
+
+            await fetch(
+                WEB_APP_URL +
+                "?" +
+                params.toString()
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.log(error);
+
+    }
+
+
+    sessionStorage.removeItem(
+        "desaAdminToken"
+    );
+
+    sessionStorage.removeItem(
+        "desaAdminLogin"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   LOAD AWAL
+===================================================== */
+
+loadData();
+
+</script>
+
 
 </body>
+
 </html>
