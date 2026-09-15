@@ -26,6 +26,7 @@
     <a href="keindahan.html">KEINDAHAN</a>
     <a href="kegiatan.html">KEGIATAN</a>
     <a href="lokasi.html">LOKASI</a>
+    <a href="admin-login.html" class="admin-login-link">🔐 LOGIN ADMIN</a>
 </nav>
 </header>
 <!-- HERO -->
@@ -103,6 +104,31 @@
     </div>
 </div>
 </section>
+
+<!-- DATABASE DESA (TAMBAHAN - ISI LAMA TETAP) -->
+<section class="database-section reveal" id="dataDesa">
+    <div class="section-heading">
+        <span>📋</span>
+        <h2>DATA DESA TERKINI</h2>
+        <span>📋</span>
+    </div>
+    <p class="database-intro">
+        Informasi yang ditambahkan melalui Dashboard Admin akan tampil di sini
+        sesuai dengan kategori yang dipilih.
+    </p>
+    <div class="database-filters" aria-label="Filter kategori">
+        <button class="data-filter active" data-category="Semua">Semua</button>
+        <button class="data-filter" data-category="Beranda">Beranda</button>
+        <button class="data-filter" data-category="Profil Desa">Profil Desa</button>
+        <button class="data-filter" data-category="Keindahan">Keindahan</button>
+        <button class="data-filter" data-category="Kegiatan">Kegiatan</button>
+        <button class="data-filter" data-category="Lokasi">Lokasi</button>
+    </div>
+    <div id="publicDataList" class="public-data-list">
+        <div class="data-loading">Memuat data desa...</div>
+    </div>
+</section>
+
 <!-- QUOTE -->
 <section class="quote">
 <div class="quote-content">
@@ -131,6 +157,7 @@
     Kecamatan Semparuk • Kabupaten Sambas
 </small>
 </footer>
+<script src="config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

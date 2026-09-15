@@ -1053,3 +1053,381 @@ to {
 }
 
 }
+/* =====================================================
+   DATABASE DESA - TAMBAHAN
+   Tidak mengubah style website lama
+===================================================== */
+
+.admin-login-link {
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.45);
+    padding: 7px 12px !important;
+    border-radius: 18px;
+    background: rgba(216,137,69,0.35);
+}
+
+.admin-login-link:hover {
+    color: #fff !important;
+    background: #d88945;
+}
+
+.database-section {
+    padding: 80px 8%;
+    background: #fffdf5;
+    text-align: center;
+}
+
+.database-intro {
+    max-width: 750px;
+    margin: 0 auto 25px;
+}
+
+.database-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 25px auto 35px;
+}
+
+.data-filter {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    background: #e8efdf;
+    color: #315b38;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.data-filter:hover,
+.data-filter.active {
+    background: #d88945;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.public-data-list {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    text-align: left;
+}
+
+.public-data-card {
+    overflow: hidden;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: .3s;
+}
+
+.public-data-card:hover {
+    transform: translateY(-6px);
+}
+
+.public-data-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+.public-data-body {
+    padding: 22px;
+}
+
+.public-data-category {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 15px;
+    background: #e8efdf;
+    color: #315b38;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.public-data-body h3 {
+    color: #315b38;
+    margin-bottom: 8px;
+}
+
+.public-data-meta {
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e5e5;
+    font-size: 13px;
+    color: #687268;
+}
+
+.data-loading,
+.data-empty,
+.data-error {
+    grid-column: 1 / -1;
+    padding: 30px;
+    text-align: center;
+    border-radius: 18px;
+    background: #e8efdf;
+}
+
+.data-error {
+    color: #9d2c2c;
+    background: #fbe8e8;
+}
+
+/* ================= ADMIN LOGIN ================= */
+
+.admin-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f0df, #e6eddb);
+    padding: 60px 20px;
+}
+
+.admin-box {
+    width: min(500px, 100%);
+    margin: 40px auto;
+    padding: 40px;
+    background: #fffdf5;
+    border-radius: 28px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.15);
+}
+
+.admin-box h1 {
+    color: #315b38;
+    margin-bottom: 10px;
+}
+
+.admin-box .subtitle {
+    margin-bottom: 25px;
+}
+
+.admin-form label,
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    display: block;
+    width: 100%;
+}
+
+.admin-form label {
+    margin: 16px 0 7px;
+    font-weight: bold;
+    color: #315b38;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+    border: 1px solid #d7d7d7;
+    border-radius: 14px;
+    padding: 13px 15px;
+    font: inherit;
+    background: white;
+    color: #354b36;
+    outline: none;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: #d88945;
+    box-shadow: 0 0 0 3px rgba(216,137,69,.12);
+}
+
+.admin-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.admin-message {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+    display: none;
+}
+
+.admin-message.show {
+    display: block;
+}
+
+.admin-message.error {
+    background: #fbe8e8;
+    color: #9d2c2c;
+}
+
+.admin-message.success {
+    background: #e8efdf;
+    color: #315b38;
+}
+
+.admin-topbar {
+    background: #305734;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-topbar h1 {
+    font-size: 25px;
+}
+
+.admin-dashboard {
+    min-height: 100vh;
+    background: #f5f0df;
+}
+
+.admin-content {
+    max-width: 1150px;
+    margin: auto;
+    padding: 45px 20px 70px;
+}
+
+.admin-card {
+    background: #fffdf5;
+    border-radius: 25px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.admin-card h2 {
+    color: #315b38;
+    margin-bottom: 20px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.admin-btn {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    background: #d88945;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.admin-btn.secondary {
+    background: #e1e1e1;
+    color: #333;
+}
+
+.admin-btn.danger {
+    background: #a43d3d;
+}
+
+.admin-record-list {
+    display: grid;
+    gap: 15px;
+}
+
+.admin-record {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.admin-record img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.admin-record h3 {
+    color: #315b38;
+    margin-bottom: 4px;
+}
+
+.admin-record small {
+    display: block;
+    color: #687268;
+    margin-top: 5px;
+}
+
+.admin-record-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-record-buttons button {
+    border: none;
+    border-radius: 18px;
+    padding: 8px 13px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.admin-edit {
+    background: #e8efdf;
+    color: #315b38;
+}
+
+.admin-delete {
+    background: #fbe8e8;
+    color: #9d2c2c;
+}
+
+.back-home {
+    display: inline-block;
+    margin-top: 15px;
+    color: #315b38;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .public-data-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-login-link {
+        margin-top: 4px;
+    }
+
+    .database-section {
+        padding: 60px 7%;
+    }
+
+    .public-data-list {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-box {
+        padding: 28px 22px;
+    }
+
+    .admin-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-record {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-record img {
+        width: 100%;
+        height: 190px;
+    }
+}
