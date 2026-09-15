@@ -1,89 +1,333 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Admin | Desa Sepinggan Gelik</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Admin | Desa Sepinggan Gelik</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dfead8, #f7f3df);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .login-box h1 {
+            margin: 5px 0;
+            color: #315b35;
+        }
+
+        .login-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #315b35;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #5d8c61;
+        }
+
+        .login-button {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            background: #4f7d52;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #3f6842;
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .back-button {
+            display: block;
+            margin-top: 15px;
+            color: #4f7d52;
+            text-decoration: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .message.error {
+            display: block;
+            background: #ffe5e5;
+            color: #a00000;
+        }
+
+        .message.success {
+            display: block;
+            background: #e2f5e4;
+            color: #246b2a;
+        }
+    </style>
 </head>
+
 <body>
-<div class="admin-page">
-    <div class="admin-box">
-        <div class="section-icon">🔐</div>
-        <h1>Login Admin</h1>
-        <p class="subtitle">
-            Masuk untuk mengelola data Website Desa Sepinggan Gelik.
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <div class="login-icon">
+            🔐
+        </div>
+
+        <h1>LOGIN ADMIN</h1>
+
+        <p>
+            Desa Sepinggan Gelik
         </p>
 
-        <form id="loginForm" class="admin-form">
-            <label for="username">Username</label>
-            <input id="username" type="text" autocomplete="username"
-                   placeholder="Masukkan username" required>
+        <form id="loginForm">
 
-            <label for="password">Password</label>
-            <input id="password" type="password" autocomplete="current-password"
-                   placeholder="Masukkan password" required>
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
 
-            <div class="admin-actions">
-                <button class="admin-btn" type="submit">🔑 Login</button>
-                <a class="admin-btn secondary" href="index.html"
-                   style="text-decoration:none;display:inline-block;">
-                    Kembali
-                </a>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Masukkan username"
+                    autocomplete="username"
+                    required
+                >
             </div>
 
-            <div id="loginMessage" class="admin-message"></div>
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Masukkan password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                🔑 MASUK
+            </button>
+
         </form>
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+        <a
+            href="index.html"
+            class="back-button"
+        >
+            ← Kembali ke Beranda
+        </a>
+
     </div>
+
 </div>
 
 <script src="config.js"></script>
+
 <script>
-const form = document.getElementById("loginForm");
-const message = document.getElementById("loginMessage");
+
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+const message = document.getElementById("message");
 
 function showMessage(text, type) {
+
     message.textContent = text;
-    message.className = "admin-message show " + type;
+
+    message.className = "message " + type;
 }
 
-form.addEventListener("submit", async function (event) {
+loginForm.addEventListener("submit", async function(event) {
+
     event.preventDefault();
 
-    if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_URL")) {
-        showMessage("Database belum terhubung. Atur URL Google Apps Script terlebih dahulu.", "error");
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    if (!username || !password) {
+
+        showMessage(
+            "Username dan password wajib diisi.",
+            "error"
+        );
+
         return;
     }
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
+    loginButton.disabled = true;
+    loginButton.textContent = "⏳ MEMERIKSA...";
+
+    showMessage(
+        "Sedang memeriksa login...",
+        "success"
+    );
 
     try {
-        showMessage("Sedang memeriksa login...", "success");
+
+        const formData = new URLSearchParams();
+
+        formData.append("action", "login");
+        formData.append("username", username);
+        formData.append("password", password);
 
         const response = await fetch(WEB_APP_URL, {
+
             method: "POST",
-            body: new URLSearchParams({
-                action: "login",
-                username: username,
-                password: password
-            })
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+
+            body: formData.toString()
+
         });
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server mengembalikan status " +
+                response.status
+            );
+        }
 
         const result = await response.json();
 
-        if (!result.success) {
-            throw new Error(result.message || "Username atau password salah.");
+        console.log("HASIL LOGIN:", result);
+
+        if (result.success === true && result.token) {
+
+            sessionStorage.setItem(
+                "desaAdminToken",
+                result.token
+            );
+
+            sessionStorage.setItem(
+                "desaAdminLogin",
+                username
+            );
+
+            showMessage(
+                "Login berhasil. Membuka dashboard...",
+                "success"
+            );
+
+            setTimeout(function() {
+
+                window.location.href = "admin.html";
+
+            }, 500);
+
+        } else {
+
+            showMessage(
+                result.message ||
+                "Username atau password salah.",
+                "error"
+            );
+
+            loginButton.disabled = false;
+            loginButton.textContent = "🔑 MASUK";
         }
 
-        sessionStorage.setItem("desaAdminToken", result.token);
-        sessionStorage.setItem("desaAdminUsername", username);
-        window.location.href = "admin.html";
-
     } catch (error) {
-        showMessage(error.message || "Login gagal.", "error");
+
+        console.error("LOGIN ERROR:", error);
+
+        showMessage(
+            "Tidak dapat terhubung ke database. Pastikan URL Apps Script dan deployment sudah benar.",
+            "error"
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent = "🔑 MASUK";
     }
+
 });
+
 </script>
+
 </body>
 </html>
