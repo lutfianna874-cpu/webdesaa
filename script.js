@@ -1,50 +1,69 @@
-// ================================
+// =====================================================
+// DESA SEPINGGAN GELIK
+// SCRIPT.JS
+// =====================================================
+
+
+// =====================================================
 // MUSIK DESA
-// ================================
+// =====================================================
 
-const tombolMusik = document.getElementById("playMusic");
-const musikDesa = document.getElementById("musikDesa");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (tombolMusik && musikDesa) {
+    const tombolMusik =
+        document.getElementById("playMusic");
 
-    tombolMusik.addEventListener("click", function () {
+    const musikDesa =
+        document.getElementById("musikDesa");
 
-        if (musikDesa.paused) {
+    if (tombolMusik && musikDesa) {
 
-            musikDesa.play()
-                .then(function () {
+        tombolMusik.addEventListener(
+            "click",
+            function () {
 
-                    tombolMusik.innerHTML = "⏸️ Jeda Musik";
+                if (musikDesa.paused) {
 
-                })
-                .catch(function (error) {
+                    musikDesa.play()
+                        .then(function () {
 
-                    console.log(
-                        "Musik gagal diputar:",
-                        error
-                    );
+                            tombolMusik.innerHTML =
+                                "⏸️ Jeda Musik";
 
-                });
+                        })
+                        .catch(function (error) {
 
-        } else {
+                            console.log(
+                                "Musik gagal diputar:",
+                                error
+                            );
 
-            musikDesa.pause();
+                        });
 
-            tombolMusik.innerHTML = "🎵 Putar Musik";
+                } else {
 
-        }
+                    musikDesa.pause();
 
-    });
+                    tombolMusik.innerHTML =
+                        "🎵 Putar Musik";
 
-}
+                }
+
+            }
+        );
+
+    }
+
+});
 
 
-// ================================
+// =====================================================
 // ANIMASI SAAT SCROLL
-// ================================
+// =====================================================
 
 const elements =
     document.querySelectorAll(".reveal");
+
 
 function revealOnScroll() {
 
@@ -56,7 +75,10 @@ function revealOnScroll() {
         const tinggiLayar =
             window.innerHeight;
 
-        if (posisi < tinggiLayar - 100) {
+        if (
+            posisi <
+            tinggiLayar - 100
+        ) {
 
             element.classList.add("show");
 
@@ -66,6 +88,7 @@ function revealOnScroll() {
 
 }
 
+
 window.addEventListener(
     "scroll",
     revealOnScroll
@@ -74,12 +97,13 @@ window.addEventListener(
 revealOnScroll();
 
 
-// ================================
+// =====================================================
 // EFEK TOMBOL
-// ================================
+// =====================================================
 
 const buttons =
     document.querySelectorAll(".btn");
+
 
 buttons.forEach(function (button) {
 
@@ -89,11 +113,16 @@ buttons.forEach(function (button) {
 
             button.classList.add("clicked");
 
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                button.classList.remove("clicked");
+                    button.classList.remove(
+                        "clicked"
+                    );
 
-            }, 200);
+                },
+                200
+            );
 
         }
     );
@@ -101,14 +130,15 @@ buttons.forEach(function (button) {
 });
 
 
-// ================================
+// =====================================================
 // EFEK GAMBAR
-// ================================
+// =====================================================
 
 const images =
     document.querySelectorAll(
         ".gallery-card img, .image-frame img, .mini-gallery img"
     );
+
 
 images.forEach(function (image) {
 
@@ -121,6 +151,7 @@ images.forEach(function (image) {
 
         }
     );
+
 
     image.addEventListener(
         "mouseleave",
@@ -135,12 +166,13 @@ images.forEach(function (image) {
 });
 
 
-// ================================
+// =====================================================
 // EFEK PARALLAX HERO
-// ================================
+// =====================================================
 
 const hero =
     document.querySelector(".hero");
+
 
 if (hero) {
 
@@ -162,16 +194,20 @@ if (hero) {
 }
 
 
-// ================================
-// ANIMASI DAUN TAMBAHAN
-// ================================
+// =====================================================
+// ANIMASI DAUN
+// =====================================================
 
 const leafContainer =
-    document.querySelector(".floating-leaves");
+    document.querySelector(
+        ".floating-leaves"
+    );
+
 
 if (leafContainer) {
 
     const leaves = [
+
         "🍃",
         "🌿",
         "🍂",
@@ -180,221 +216,748 @@ if (leafContainer) {
         "🌾",
         "🍂",
         "🌿"
+
     ];
 
-    leaves.forEach(function (leaf, index) {
 
-        const element =
-            document.createElement("span");
+    leaves.forEach(
+        function (leaf) {
 
-        element.innerHTML = leaf;
+            const element =
+                document.createElement(
+                    "span"
+                );
 
-        element.style.left =
-            Math.random() * 100 + "%";
 
-        element.style.animationDuration =
-            (8 + Math.random() * 8) + "s";
+            element.innerHTML =
+                leaf;
 
-        element.style.animationDelay =
-            (Math.random() * 8) + "s";
 
-        element.style.fontSize =
-            (18 + Math.random() * 18) + "px";
+            element.style.left =
+                Math.random() * 100 +
+                "%";
 
-        leafContainer.appendChild(element);
 
-    });
+            element.style.animationDuration =
+                (
+                    8 +
+                    Math.random() * 8
+                ) +
+                "s";
+
+
+            element.style.animationDelay =
+                (
+                    Math.random() * 8
+                ) +
+                "s";
+
+
+            element.style.fontSize =
+                (
+                    18 +
+                    Math.random() * 18
+                ) +
+                "px";
+
+
+            leafContainer.appendChild(
+                element
+            );
+
+        }
+    );
 
 }
 
 
-// ================================
+// =====================================================
 // TAHUN OTOMATIS
-// ================================
+// =====================================================
 
 const tahun =
     document.querySelectorAll(
         ".current-year"
     );
 
-tahun.forEach(function (element) {
 
-    element.textContent =
-        new Date().getFullYear();
+tahun.forEach(
+    function (element) {
 
-});
+        element.textContent =
+            new Date().getFullYear();
+
+    }
+);
 
 
-// ================================
+// =====================================================
+// DATABASE DESA
+// =====================================================
+
+(function () {
+
+    /*
+       URL GOOGLE APPS SCRIPT
+       JANGAN DIUBAH
+    */
+
+    const API_URL =
+        "https://script.google.com/macros/s/AKfycbzN1j6Bhyy8_RZTvsK-aPzVNxKlG0JPtqLNzhJueziXDvt0isxag3VrTkiwtzxn1fU/exec";
+
+
+    /*
+       TUNGGU HTML SELESAI
+    */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const list =
+                document.getElementById(
+                    "publicDataList"
+                );
+
+
+            /*
+               Kalau halaman tidak mempunyai
+               bagian database, hentikan.
+            */
+
+            if (!list) {
+                return;
+            }
+
+
+            loadPublicData(
+                "Semua"
+            );
+
+
+            /*
+               FILTER DATA
+            */
+
+            const filterButtons =
+                document.querySelectorAll(
+                    ".data-filter"
+                );
+
+
+            filterButtons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            filterButtons.forEach(
+                                function (btn) {
+
+                                    btn.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            button.classList.add(
+                                "active"
+                            );
+
+
+                            const category =
+                                button.dataset.category ||
+                                "Semua";
+
+
+                            loadPublicData(
+                                category
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    // =================================================
+    // FORMAT TANGGAL
+    // =================================================
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "";
+        }
+
+
+        /*
+           Jika format yyyy-mm-dd
+        */
+
+        const parts =
+            String(value).split("-");
+
+
+        if (
+            parts.length === 3 &&
+            parts[0].length === 4
+        ) {
+
+            const year =
+                parts[0];
+
+            const month =
+                parseInt(parts[1], 10);
+
+            const day =
+                parseInt(parts[2], 10);
+
+
+            const bulan = [
+
+                "Januari",
+                "Februari",
+                "Maret",
+                "April",
+                "Mei",
+                "Juni",
+                "Juli",
+                "Agustus",
+                "September",
+                "Oktober",
+                "November",
+                "Desember"
+
+            ];
+
+
+            if (
+                month >= 1 &&
+                month <= 12
+            ) {
+
+                return (
+                    day +
+                    " " +
+                    bulan[month - 1] +
+                    " " +
+                    year
+                );
+
+            }
+
+        }
+
+
+        return String(value);
+
+    }
+
+
+    // =================================================
+    // CEK URL GAMBAR
+    // =================================================
+
+    function safeUrl(value) {
+
+        const url =
+            String(
+                value || ""
+            ).trim();
+
+
+        if (!url) {
+            return "";
+        }
+
+
+        if (
+            /^https?:\/\//i.test(url) ||
+            /^\//.test(url) ||
+            /^\.\//.test(url)
+        ) {
+
+            return url;
+
+        }
+
+
+        return "";
+
+    }
+
+
+    // =================================================
+    // BUAT CARD DATA
+    // =================================================
+
+    function createCard(item) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "public-data-card";
+
+
+        /*
+           Ambil data dengan format camelCase
+           dan tetap mendukung format lama
+        */
+
+        const id =
+            item.id ||
+            item.ID ||
+            "";
+
+
+        const nama =
+            item.nama ||
+            item.NAMA ||
+            "Admin Desa";
+
+
+        const judul =
+            item.judul ||
+            item.JUDUL ||
+            "Tanpa judul";
+
+
+        const kategori =
+            item.kategori ||
+            item.KATEGORI ||
+            "Beranda";
+
+
+        const deskripsi =
+            item.deskripsi ||
+            item.DESKRIPSI ||
+            "";
+
+
+        const urlGambar =
+            item.urlGambar ||
+            item.URL_GAMBAR ||
+            "";
+
+
+        const tanggal =
+            item.tanggal ||
+            item.TANGGAL ||
+            "";
+
+
+        /*
+           GAMBAR
+        */
+
+        const imageUrl =
+            safeUrl(
+                urlGambar
+            );
+
+
+        if (imageUrl) {
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.className =
+                "public-data-image";
+
+
+            img.src =
+                imageUrl;
+
+
+            img.alt =
+                judul;
+
+
+            img.loading =
+                "lazy";
+
+
+            img.onerror =
+                function () {
+
+                    this.style.display =
+                        "none";
+
+                };
+
+
+            card.appendChild(
+                img
+            );
+
+        }
+
+
+        /*
+           BODY
+        */
+
+        const body =
+            document.createElement(
+                "div"
+            );
+
+
+        body.className =
+            "public-data-body";
+
+
+        /*
+           KATEGORI
+        */
+
+        const category =
+            document.createElement(
+                "span"
+            );
+
+
+        category.className =
+            "public-data-category";
+
+
+        category.textContent =
+            kategori;
+
+
+        /*
+           JUDUL
+        */
+
+        const title =
+            document.createElement(
+                "h3"
+            );
+
+
+        title.textContent =
+            judul;
+
+
+        /*
+           DESKRIPSI
+        */
+
+        const desc =
+            document.createElement(
+                "p"
+            );
+
+
+        desc.textContent =
+            deskripsi;
+
+
+        /*
+           META
+        */
+
+        const meta =
+            document.createElement(
+                "div"
+            );
+
+
+        meta.className =
+            "public-data-meta";
+
+
+        meta.textContent =
+            "👤 " +
+            nama +
+            (
+                tanggal
+                    ? " • 📅 " +
+                      formatDate(tanggal)
+                    : ""
+            );
+
+
+        /*
+           MASUKKAN KE BODY
+        */
+
+        body.appendChild(
+            category
+        );
+
+
+        body.appendChild(
+            title
+        );
+
+
+        body.appendChild(
+            desc
+        );
+
+
+        body.appendChild(
+            meta
+        );
+
+
+        /*
+           ID DATA
+        */
+
+        if (id) {
+
+            card.dataset.id =
+                id;
+
+        }
+
+
+        /*
+           MASUKKAN BODY KE CARD
+        */
+
+        card.appendChild(
+            body
+        );
+
+
+        return card;
+
+    }
+
+
+    // =================================================
+    // AMBIL DATA DARI GOOGLE APPS SCRIPT
+    // =================================================
+
+    async function loadPublicData(
+        selectedCategory
+    ) {
+
+        const list =
+            document.getElementById(
+                "publicDataList"
+            );
+
+
+        if (!list) {
+            return;
+        }
+
+
+        /*
+           Loading
+        */
+
+        list.innerHTML =
+            '<div class="data-loading">' +
+            'Memuat data desa...' +
+            '</div>';
+
+
+        try {
+
+            /*
+               URL API
+            */
+
+            const requestUrl =
+                API_URL +
+                "?action=list&callback=desaData";
+
+
+            /*
+               FETCH
+            */
+
+            const response =
+                await fetch(
+                    requestUrl,
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                        redirect: "follow"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            /*
+               AMBIL JSON
+            */
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "DATA DESA DARI API:",
+                result
+            );
+
+
+            /*
+               CEK RESPONSE
+            */
+
+            if (
+                !result ||
+                result.success !== true
+            ) {
+
+                throw new Error(
+                    result &&
+                    result.message
+                        ? result.message
+                        : "Data gagal dimuat."
+                );
+
+            }
+
+
+            /*
+               DATA
+            */
+
+            let data =
+                Array.isArray(
+                    result.data
+                )
+                    ? result.data
+                    : [];
+
+
+            /*
+               FILTER
+            */
+
+            if (
+                selectedCategory &&
+                selectedCategory !==
+                    "Semua"
+            ) {
+
+                data =
+                    data.filter(
+                        function (item) {
+
+                            const kategori =
+                                item.kategori ||
+                                item.KATEGORI ||
+                                "";
+
+
+                            return (
+                                kategori ===
+                                selectedCategory
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            /*
+               TIDAK ADA DATA
+            */
+
+            if (!data.length) {
+
+                list.innerHTML =
+                    '<div class="data-empty">' +
+                    'Belum ada data untuk kategori ini.' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            /*
+               BERSIHKAN LIST
+            */
+
+            list.innerHTML =
+                "";
+
+
+            /*
+               TAMPILKAN DATA
+            */
+
+            data.forEach(
+                function (item) {
+
+                    const card =
+                        createCard(
+                            item
+                        );
+
+
+                    list.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Gagal mengambil DATA_DESA:",
+                error
+            );
+
+
+            list.innerHTML =
+                '<div class="data-error">' +
+                '<strong>Data belum dapat dimuat.</strong><br>' +
+                'Silakan refresh halaman beberapa saat lagi.' +
+                '</div>';
+
+        }
+
+    }
+
+})();
+
+
+// =====================================================
 // PESAN CONSOLE
-// ================================
+// =====================================================
 
 console.log(
     "🌾 Website Desa Sepinggan Gelik berhasil dijalankan!"
 );
 
-// =====================================================
-// DATABASE DESA - BAGIAN TAMBAHAN
-// =====================================================
-
-(function () {
-    const apiUrl =
-        typeof WEB_APP_URL !== "undefined"
-            ? WEB_APP_URL
-            : "";
-
-    if (!apiUrl || apiUrl.includes("PASTE_URL")) {
-        const list = document.getElementById("publicDataList");
-        if (list) {
-            list.innerHTML =
-                '<div class="data-empty">Database belum terhubung. Admin perlu mengatur URL Google Apps Script.</div>';
-        }
-        return;
-    }
-
-    function formatDate(value) {
-        if (!value) return "";
-        const date = new Date(value);
-        if (isNaN(date.getTime())) return value;
-        return date.toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
-    }
-
-    function safeUrl(value) {
-        const url = String(value || "").trim();
-        if (!url) return "";
-        if (/^(https?:\/\/|\/|\.\/)/i.test(url)) return url;
-        return "";
-    }
-
-    function createCard(item) {
-        const card = document.createElement("article");
-        card.className = "public-data-card";
-
-        const imageUrl = safeUrl(item.urlGambar || item.URL_GAMBAR);
-        if (imageUrl) {
-            const img = document.createElement("img");
-            img.className = "public-data-image";
-            img.src = imageUrl;
-            img.alt = item.judul || "Gambar data desa";
-            img.loading = "lazy";
-            img.onerror = function () {
-                this.style.display = "none";
-            };
-            card.appendChild(img);
-        }
-
-        const body = document.createElement("div");
-        body.className = "public-data-body";
-
-        const category = document.createElement("span");
-        category.className = "public-data-category";
-        category.textContent =
-            item.kategori || item.KATEGORI || "Beranda";
-
-        const title = document.createElement("h3");
-        title.textContent =
-            item.judul || item.JUDUL || "Tanpa judul";
-
-        const desc = document.createElement("p");
-        desc.textContent =
-            item.deskripsi || item.DESKRIPSI || "";
-
-        const meta = document.createElement("div");
-        meta.className = "public-data-meta";
-        const nama =
-            item.nama || item.NAMA || "Admin Desa";
-        const tanggal =
-            item.tanggal || item.TANGGAL || "";
-
-        meta.textContent =
-            "👤 " + nama +
-            (tanggal ? " • 📅 " + formatDate(tanggal) : "");
-
-        body.appendChild(category);
-        body.appendChild(title);
-        body.appendChild(desc);
-        body.appendChild(meta);
-        card.appendChild(body);
-
-        return card;
-    }
-
-    async function loadPublicData(category) {
-        const list = document.getElementById("publicDataList");
-        if (!list) return;
-
-        list.innerHTML =
-            '<div class="data-loading">Memuat data desa...</div>';
-
-        try {
-            const response =
-                await fetch(apiUrl + "?action=list", {
-                    method: "GET",
-                    cache: "no-store"
-                });
-
-            const result = await response.json();
-
-            if (!result.success) {
-                throw new Error(result.message || "Gagal mengambil data.");
-            }
-
-            let data = Array.isArray(result.data)
-                ? result.data
-                : [];
-
-            if (category && category !== "Semua") {
-                data = data.filter(function (item) {
-                    return (item.kategori || item.KATEGORI) === category;
-                });
-            }
-
-            if (!data.length) {
-                list.innerHTML =
-                    '<div class="data-empty">Belum ada data untuk kategori ini.</div>';
-                return;
-            }
-
-            list.innerHTML = "";
-            data.forEach(function (item) {
-                list.appendChild(createCard(item));
-            });
-
-        } catch (error) {
-            console.error(error);
-            list.innerHTML =
-                '<div class="data-error">Data belum dapat dimuat. Pastikan URL Google Apps Script sudah benar dan Web App sudah diakses.</div>';
-        }
-    }
-
-    const defaultSection =
-        document.querySelector(".page-database-section");
-
-    const homeSection =
-        document.getElementById("dataDesa");
-
-    if (homeSection) {
-        loadPublicData("Semua");
-
-        document.querySelectorAll(".data-filter")
-            .forEach(function (button) {
-                button.addEventListener("click", function () {
-                    document.querySelectorAll(".data-filter")
-                        .forEach(function (btn) {
-                            btn.classList.remove("active");
-                        });
-
-                    button.classList.add("active");
-                    loadPublicData(button.dataset.category);
-                });
-            });
-    } else if (defaultSection) {
-        loadPublicData(
-            defaultSection.dataset.defaultCategory || "Semua"
-        );
-    }
-})();
+console.log(
+    "📊 Database DATA_DESA terhubung."
+);
