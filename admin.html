@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Admin | Desa Sepinggan Gelik</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-dashboard">
+
+<header class="admin-topbar">
+    <div>
+        <h1>Dashboard Admin</h1>
+        <div>Kelola data Website Desa Sepinggan Gelik</div>
+    </div>
+    <button id="logoutBtn" class="admin-btn secondary">Logout</button>
+</header>
+
+<main class="admin-content">
+
+<section class="admin-card">
+    <h2 id="formTitle">Tambah / Edit Data</h2>
+
+    <form id="dataForm" class="admin-form">
+        <input type="hidden" id="dataId">
+
+        <label for="nama">Nama Pengisi</label>
+        <input id="nama" type="text" placeholder="Nama orang yang mengisi data" required>
+
+        <label for="judul">Judul</label>
+        <input id="judul" type="text" placeholder="Judul" required>
+
+        <label for="kategori">Pilih Kategori</label>
+        <select id="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="Beranda">Beranda</option>
+            <option value="Profil Desa">Profil Desa</option>
+            <option value="Keindahan">Keindahan</option>
+            <option value="Kegiatan">Kegiatan</option>
+            <option value="Lokasi">Lokasi</option>
+        </select>
+
+        <label for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" placeholder="Deskripsi"></textarea>
+
+        <label for="urlGambar">URL Gambar</label>
+        <input id="urlGambar" type="url"
+               placeholder="https://.../gambar.jpg">
+
+        <div class="admin-actions">
+            <button class="admin-btn" type="submit">💾 Simpan Data</button>
+            <button class="admin-btn secondary" type="button" id="clearBtn">Bersihkan</button>
+        </div>
+
+        <div id="adminMessage" class="admin-message"></div>
+    </form>
+</section>
+
+<section class="admin-card">
+    <h2>Data Tersimpan</h2>
+    <div id="adminRecordList" class="admin-record-list">
+        <div class="data-loading">Memuat data...</div>
+    </div>
+</section>
+
+</main>
+</div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+    const token = sessionStorage.getItem("desaAdminToken");
+    if (!token) {
+        window.location.href = "admin-login.html";
+        return;
+    }
+
+    const form = document.getElementById("dataForm");
+    const list = document.getElementById("adminRecordList");
+    const message = document.getElementById("adminMessage");
+    const clearBtn = document.getElementById("clearBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const formTitle = document.getElementById("formTitle");
+
+    let records = [];
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "admin-message show " + type;
+    }
+
+    function clearForm() {
+        document.getElementById("dataId").value = "";
+        document.getElementById("nama").value = "";
+        document.getElementById("judul").value = "";
+        document.getElementById("kategori").value = "";
+        document.getElementById("deskripsi").value = "";
+        document.getElementById("urlGambar").value = "";
+        formTitle.textContent = "Tambah / Edit Data";
+        message.className = "admin-message";
+    }
+
+    function safeUrl(value) {
+        const url = String(value || "").trim();
+        return /^(https?:\/\/|\/|\.\/)/i.test(url) ? url : "";
+    }
+
+    function formatDate(value) {
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return value || "";
+        return d.toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+    }
+
+    async function apiPost(payload) {
+        const response = await fetch(WEB_APP_URL, {
+            method: "POST",
+            body: new URLSearchParams(payload)
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            if ((result.message || "").toLowerCase().includes("token")) {
+                sessionStorage.clear();
+                window.location.href = "admin-login.html";
+            }
+            throw new Error(result.message || "Permintaan gagal.");
+        }
+
+        return result;
+    }
+
+    function renderRecords() {
+        list.innerHTML = "";
+
+        if (!records.length) {
+            list.innerHTML =
+                '<div class="data-empty">Belum ada data tersimpan.</div>';
+            return;
+        }
+
+        records.forEach(function (item) {
+            const row = document.createElement("div");
+            row.className = "admin-record";
+
+            const imageUrl = safeUrl(item.urlGambar);
+            if (imageUrl) {
+                const img = document.createElement("img");
+                img.src = imageUrl;
+                img.alt = item.judul || "Gambar";
+                img.onerror = function () {
+                    this.style.display = "none";
+                };
+                row.appendChild(img);
+            } else {
+                const blank = document.createElement("div");
+                blank.style.width = "120px";
+                blank.style.height = "90px";
+                row.appendChild(blank);
+            }
+
+            const info = document.createElement("div");
+
+            const title = document.createElement("h3");
+            title.textContent = item.judul || "Tanpa judul";
+
+            const category = document.createElement("div");
+            category.textContent = "Kategori: " + (item.kategori || "-");
+
+            const desc = document.createElement("div");
+            desc.textContent = item.deskripsi || "";
+
+            const meta = document.createElement("small");
+            meta.textContent =
+                "👤 " + (item.nama || "Admin") +
+                (item.tanggal ? " • 📅 " + formatDate(item.tanggal) : "");
+
+            info.appendChild(title);
+            info.appendChild(category);
+            info.appendChild(desc);
+            info.appendChild(meta);
+
+            const buttons = document.createElement("div");
+            buttons.className = "admin-record-buttons";
+
+            const edit = document.createElement("button");
+            edit.className = "admin-edit";
+            edit.textContent = "Edit";
+            edit.onclick = function () {
+                document.getElementById("dataId").value = item.id;
+                document.getElementById("nama").value = item.nama || "";
+                document.getElementById("judul").value = item.judul || "";
+                document.getElementById("kategori").value = item.kategori || "";
+                document.getElementById("deskripsi").value = item.deskripsi || "";
+                document.getElementById("urlGambar").value = item.urlGambar || "";
+                formTitle.textContent = "Edit Data";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            };
+
+            const del = document.createElement("button");
+            del.className = "admin-delete";
+            del.textContent = "Hapus";
+            del.onclick = async function () {
+                if (!confirm("Hapus data ini?")) return;
+
+                try {
+                    await apiPost({
+                        action: "delete",
+                        token: token,
+                        id: item.id
+                    });
+
+                    showMessage("Data berhasil dihapus.", "success");
+                    await loadRecords();
+                } catch (error) {
+                    showMessage(error.message, "error");
+                }
+            };
+
+            buttons.appendChild(edit);
+            buttons.appendChild(del);
+
+            row.appendChild(info);
+            row.appendChild(buttons);
+            list.appendChild(row);
+        });
+    }
+
+    async function loadRecords() {
+        try {
+            list.innerHTML =
+                '<div class="data-loading">Memuat data...</div>';
+
+            const response = await fetch(
+                WEB_APP_URL + "?action=list",
+                { cache: "no-store" }
+            );
+
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.message || "Gagal memuat data.");
+            }
+
+            records = result.data || [];
+            renderRecords();
+
+        } catch (error) {
+            list.innerHTML =
+                '<div class="data-error">' +
+                (error.message || "Gagal memuat data.") +
+                "</div>";
+        }
+    }
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        try {
+            const id = document.getElementById("dataId").value.trim();
+
+            const payload = {
+                action: id ? "update" : "create",
+                token: token,
+                id: id,
+                nama: document.getElementById("nama").value.trim(),
+                judul: document.getElementById("judul").value.trim(),
+                kategori: document.getElementById("kategori").value,
+                deskripsi: document.getElementById("deskripsi").value.trim(),
+                urlGambar: document.getElementById("urlGambar").value.trim()
+            };
+
+            if (!payload.nama || !payload.judul || !payload.kategori) {
+                showMessage("Nama, judul, dan kategori wajib diisi.", "error");
+                return;
+            }
+
+            showMessage("Menyimpan data...", "success");
+
+            await apiPost(payload);
+
+            showMessage(
+                id ? "Data berhasil diperbarui." : "Data berhasil disimpan.",
+                "success"
+            );
+
+            clearForm();
+            await loadRecords();
+
+        } catch (error) {
+            showMessage(error.message || "Gagal menyimpan data.", "error");
+        }
+    });
+
+    clearBtn.addEventListener("click", clearForm);
+
+    logoutBtn.addEventListener("click", function () {
+        sessionStorage.clear();
+        window.location.href = "admin-login.html";
+    });
+
+    if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_URL")) {
+        showMessage("URL Google Apps Script belum diatur.", "error");
+    } else {
+        loadRecords();
+    }
+})();
+</script>
+</body>
+</html>

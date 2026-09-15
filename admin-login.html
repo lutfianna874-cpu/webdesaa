@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Admin | Desa Sepinggan Gelik</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-page">
+    <div class="admin-box">
+        <div class="section-icon">🔐</div>
+        <h1>Login Admin</h1>
+        <p class="subtitle">
+            Masuk untuk mengelola data Website Desa Sepinggan Gelik.
+        </p>
+
+        <form id="loginForm" class="admin-form">
+            <label for="username">Username</label>
+            <input id="username" type="text" autocomplete="username"
+                   placeholder="Masukkan username" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" autocomplete="current-password"
+                   placeholder="Masukkan password" required>
+
+            <div class="admin-actions">
+                <button class="admin-btn" type="submit">🔑 Login</button>
+                <a class="admin-btn secondary" href="index.html"
+                   style="text-decoration:none;display:inline-block;">
+                    Kembali
+                </a>
+            </div>
+
+            <div id="loginMessage" class="admin-message"></div>
+        </form>
+    </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+const form = document.getElementById("loginForm");
+const message = document.getElementById("loginMessage");
+
+function showMessage(text, type) {
+    message.textContent = text;
+    message.className = "admin-message show " + type;
+}
+
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_URL")) {
+        showMessage("Database belum terhubung. Atur URL Google Apps Script terlebih dahulu.", "error");
+        return;
+    }
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+        showMessage("Sedang memeriksa login...", "success");
+
+        const response = await fetch(WEB_APP_URL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "login",
+                username: username,
+                password: password
+            })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.message || "Username atau password salah.");
+        }
+
+        sessionStorage.setItem("desaAdminToken", result.token);
+        sessionStorage.setItem("desaAdminUsername", username);
+        window.location.href = "admin.html";
+
+    } catch (error) {
+        showMessage(error.message || "Login gagal.", "error");
+    }
+});
+</script>
+</body>
+</html>
