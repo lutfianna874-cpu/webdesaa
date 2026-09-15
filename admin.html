@@ -1,315 +1,1042 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Admin | Desa Sepinggan Gelik</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="admin-dashboard">
 
-<header class="admin-topbar">
-    <div>
-        <h1>Dashboard Admin</h1>
-        <div>Kelola data Website Desa Sepinggan Gelik</div>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard Admin | Desa Sepinggan Gelik</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6ef;
+        }
+
+        .admin-header {
+            background: #315b35;
+            color: white;
+            padding: 20px;
+        }
+
+        .admin-header-inner {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout-button {
+            border: none;
+            background: #ffffff;
+            color: #315b35;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .admin-card h2 {
+            margin-top: 0;
+            color: #315b35;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #315b35;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .save-button,
+        .cancel-button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .save-button {
+            background: #4f7d52;
+            color: white;
+        }
+
+        .cancel-button {
+            background: #ddd;
+            color: #333;
+        }
+
+        .data-item {
+            border: 1px solid #ddd;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .data-item h3 {
+            margin-top: 0;
+            color: #315b35;
+        }
+
+        .data-category {
+            display: inline-block;
+            background: #dcebdc;
+            color: #315b35;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .data-image {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        .data-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .edit-button,
+        .delete-button {
+            border: none;
+            padding: 8px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-button {
+            background: #e7c95b;
+        }
+
+        .delete-button {
+            background: #d9534f;
+            color: white;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .message.success {
+            display: block;
+            background: #e0f3e2;
+            color: #246b2a;
+        }
+
+        .message.error {
+            display: block;
+            background: #ffe1e1;
+            color: #9b0000;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            .admin-header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="admin-header">
+
+    <div class="admin-header-inner">
+
+        <h1>
+            🌾 DASHBOARD ADMIN
+        </h1>
+
+        <button
+            class="logout-button"
+            id="logoutButton"
+        >
+            🚪 Logout
+        </button>
+
     </div>
-    <button id="logoutBtn" class="admin-btn secondary">Logout</button>
+
 </header>
 
-<main class="admin-content">
 
-<section class="admin-card">
-    <h2 id="formTitle">Tambah / Edit Data</h2>
+<main class="admin-container">
 
-    <form id="dataForm" class="admin-form">
-        <input type="hidden" id="dataId">
+    <div
+        id="message"
+        class="message"
+    ></div>
 
-        <label for="nama">Nama Pengisi</label>
-        <input id="nama" type="text" placeholder="Nama orang yang mengisi data" required>
 
-        <label for="judul">Judul</label>
-        <input id="judul" type="text" placeholder="Judul" required>
+    <!-- FORM DATA -->
 
-        <label for="kategori">Pilih Kategori</label>
-        <select id="kategori" required>
-            <option value="">Pilih Kategori</option>
-            <option value="Beranda">Beranda</option>
-            <option value="Profil Desa">Profil Desa</option>
-            <option value="Keindahan">Keindahan</option>
-            <option value="Kegiatan">Kegiatan</option>
-            <option value="Lokasi">Lokasi</option>
-        </select>
+    <section class="admin-card">
 
-        <label for="deskripsi">Deskripsi</label>
-        <textarea id="deskripsi" placeholder="Deskripsi"></textarea>
+        <h2 id="formTitle">
+            ➕ Tambah Data Desa
+        </h2>
 
-        <label for="urlGambar">URL Gambar</label>
-        <input id="urlGambar" type="url"
-               placeholder="https://.../gambar.jpg">
+        <form id="dataForm">
 
-        <div class="admin-actions">
-            <button class="admin-btn" type="submit">💾 Simpan Data</button>
-            <button class="admin-btn secondary" type="button" id="clearBtn">Bersihkan</button>
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="nama">
+                        Nama Pengisi
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        required
+                        placeholder="Contoh: Lutfiyana"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="judul">
+                        Judul
+                    </label>
+
+                    <input
+                        type="text"
+                        id="judul"
+                        required
+                        placeholder="Judul informasi"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="kategori">
+                        Kategori
+                    </label>
+
+                    <select
+                        id="kategori"
+                        required
+                    >
+
+                        <option value="">
+                            -- Pilih Kategori --
+                        </option>
+
+                        <option value="Beranda">
+                            Beranda
+                        </option>
+
+                        <option value="Profil Desa">
+                            Profil Desa
+                        </option>
+
+                        <option value="Keindahan">
+                            Keindahan
+                        </option>
+
+                        <option value="Kegiatan">
+                            Kegiatan
+                        </option>
+
+                        <option value="Lokasi">
+                            Lokasi
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="urlGambar">
+                        URL Gambar
+                    </label>
+
+                    <input
+                        type="url"
+                        id="urlGambar"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="deskripsi">
+                        Deskripsi
+                    </label>
+
+                    <textarea
+                        id="deskripsi"
+                        required
+                        placeholder="Tuliskan informasi desa..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="button-group">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                    id="saveButton"
+                >
+                    💾 Simpan Data
+                </button>
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="cancelButton"
+                    style="display:none;"
+                >
+                    ❌ Batal Edit
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- DATA -->
+
+    <section class="admin-card">
+
+        <h2>
+            📋 Data Desa
+        </h2>
+
+        <div id="dataList">
+
+            <div class="loading">
+                Memuat data...
+            </div>
+
         </div>
 
-        <div id="adminMessage" class="admin-message"></div>
-    </form>
-</section>
-
-<section class="admin-card">
-    <h2>Data Tersimpan</h2>
-    <div id="adminRecordList" class="admin-record-list">
-        <div class="data-loading">Memuat data...</div>
-    </div>
-</section>
+    </section>
 
 </main>
-</div>
+
 
 <script src="config.js"></script>
+
 <script>
-(function () {
-    const token = sessionStorage.getItem("desaAdminToken");
-    if (!token) {
-        window.location.href = "admin-login.html";
-        return;
-    }
 
-    const form = document.getElementById("dataForm");
-    const list = document.getElementById("adminRecordList");
-    const message = document.getElementById("adminMessage");
-    const clearBtn = document.getElementById("clearBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const formTitle = document.getElementById("formTitle");
+const token =
+    sessionStorage.getItem("desaAdminToken");
 
-    let records = [];
+const WEB_URL =
+    typeof WEB_APP_URL !== "undefined"
+        ? WEB_APP_URL
+        : "";
 
-    function showMessage(text, type) {
-        message.textContent = text;
-        message.className = "admin-message show " + type;
-    }
 
-    function clearForm() {
-        document.getElementById("dataId").value = "";
-        document.getElementById("nama").value = "";
-        document.getElementById("judul").value = "";
-        document.getElementById("kategori").value = "";
-        document.getElementById("deskripsi").value = "";
-        document.getElementById("urlGambar").value = "";
-        formTitle.textContent = "Tambah / Edit Data";
-        message.className = "admin-message";
-    }
+/* ==============================
+   CEK LOGIN
+============================== */
 
-    function safeUrl(value) {
-        const url = String(value || "").trim();
-        return /^(https?:\/\/|\/|\.\/)/i.test(url) ? url : "";
-    }
+if (!token) {
 
-    function formatDate(value) {
-        const d = new Date(value);
-        if (isNaN(d.getTime())) return value || "";
-        return d.toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
-    }
+    window.location.href =
+        "admin-login.html";
 
-    async function apiPost(payload) {
-        const response = await fetch(WEB_APP_URL, {
+}
+
+
+/* ==============================
+   ELEMENT
+============================== */
+
+const dataForm =
+    document.getElementById("dataForm");
+
+const dataList =
+    document.getElementById("dataList");
+
+const message =
+    document.getElementById("message");
+
+const saveButton =
+    document.getElementById("saveButton");
+
+const cancelButton =
+    document.getElementById("cancelButton");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+
+let editingId = null;
+
+
+/* ==============================
+   MESSAGE
+============================== */
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+    setTimeout(function() {
+
+        message.className =
+            "message";
+
+    }, 4000);
+
+}
+
+
+/* ==============================
+   POST API
+============================== */
+
+async function apiPost(data) {
+
+    const formData =
+        new URLSearchParams();
+
+    Object.keys(data).forEach(function(key) {
+
+        formData.append(
+            key,
+            data[key] ?? ""
+        );
+
+    });
+
+    const response =
+        await fetch(WEB_URL, {
+
             method: "POST",
-            body: new URLSearchParams(payload)
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded;charset=UTF-8"
+            },
+
+            body: formData.toString()
+
         });
 
-        const result = await response.json();
+    if (!response.ok) {
 
-        if (!result.success) {
-            if ((result.message || "").toLowerCase().includes("token")) {
-                sessionStorage.clear();
-                window.location.href = "admin-login.html";
-            }
-            throw new Error(result.message || "Permintaan gagal.");
-        }
+        throw new Error(
+            "HTTP " + response.status
+        );
 
-        return result;
     }
 
-    function renderRecords() {
-        list.innerHTML = "";
+    return await response.json();
 
-        if (!records.length) {
-            list.innerHTML =
-                '<div class="data-empty">Belum ada data tersimpan.</div>';
-            return;
-        }
+}
 
-        records.forEach(function (item) {
-            const row = document.createElement("div");
-            row.className = "admin-record";
 
-            const imageUrl = safeUrl(item.urlGambar);
-            if (imageUrl) {
-                const img = document.createElement("img");
-                img.src = imageUrl;
-                img.alt = item.judul || "Gambar";
-                img.onerror = function () {
-                    this.style.display = "none";
-                };
-                row.appendChild(img);
-            } else {
-                const blank = document.createElement("div");
-                blank.style.width = "120px";
-                blank.style.height = "90px";
-                row.appendChild(blank);
-            }
+/* ==============================
+   LOAD DATA
+============================== */
 
-            const info = document.createElement("div");
+async function loadData() {
 
-            const title = document.createElement("h3");
-            title.textContent = item.judul || "Tanpa judul";
+    dataList.innerHTML =
+        '<div class="loading">⏳ Memuat data...</div>';
 
-            const category = document.createElement("div");
-            category.textContent = "Kategori: " + (item.kategori || "-");
+    try {
 
-            const desc = document.createElement("div");
-            desc.textContent = item.deskripsi || "";
-
-            const meta = document.createElement("small");
-            meta.textContent =
-                "👤 " + (item.nama || "Admin") +
-                (item.tanggal ? " • 📅 " + formatDate(item.tanggal) : "");
-
-            info.appendChild(title);
-            info.appendChild(category);
-            info.appendChild(desc);
-            info.appendChild(meta);
-
-            const buttons = document.createElement("div");
-            buttons.className = "admin-record-buttons";
-
-            const edit = document.createElement("button");
-            edit.className = "admin-edit";
-            edit.textContent = "Edit";
-            edit.onclick = function () {
-                document.getElementById("dataId").value = item.id;
-                document.getElementById("nama").value = item.nama || "";
-                document.getElementById("judul").value = item.judul || "";
-                document.getElementById("kategori").value = item.kategori || "";
-                document.getElementById("deskripsi").value = item.deskripsi || "";
-                document.getElementById("urlGambar").value = item.urlGambar || "";
-                formTitle.textContent = "Edit Data";
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            };
-
-            const del = document.createElement("button");
-            del.className = "admin-delete";
-            del.textContent = "Hapus";
-            del.onclick = async function () {
-                if (!confirm("Hapus data ini?")) return;
-
-                try {
-                    await apiPost({
-                        action: "delete",
-                        token: token,
-                        id: item.id
-                    });
-
-                    showMessage("Data berhasil dihapus.", "success");
-                    await loadRecords();
-                } catch (error) {
-                    showMessage(error.message, "error");
-                }
-            };
-
-            buttons.appendChild(edit);
-            buttons.appendChild(del);
-
-            row.appendChild(info);
-            row.appendChild(buttons);
-            list.appendChild(row);
-        });
-    }
-
-    async function loadRecords() {
-        try {
-            list.innerHTML =
-                '<div class="data-loading">Memuat data...</div>';
-
-            const response = await fetch(
-                WEB_APP_URL + "?action=list",
-                { cache: "no-store" }
+        const response =
+            await fetch(
+                WEB_URL + "?action=list"
             );
 
-            const result = await response.json();
+        if (!response.ok) {
 
-            if (!result.success) {
-                throw new Error(result.message || "Gagal memuat data.");
-            }
+            throw new Error(
+                "HTTP " + response.status
+            );
 
-            records = result.data || [];
-            renderRecords();
-
-        } catch (error) {
-            list.innerHTML =
-                '<div class="data-error">' +
-                (error.message || "Gagal memuat data.") +
-                "</div>";
         }
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Gagal mengambil data."
+            );
+
+        }
+
+        renderData(
+            result.data || []
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        dataList.innerHTML =
+            "<p>❌ Gagal mengambil data dari database.</p>";
+
     }
 
-    form.addEventListener("submit", async function (event) {
+}
+
+
+/* ==============================
+   RENDER DATA
+============================== */
+
+function renderData(data) {
+
+    if (!data.length) {
+
+        dataList.innerHTML =
+            "<p>Belum ada data desa.</p>";
+
+        return;
+
+    }
+
+    dataList.innerHTML = "";
+
+    data.forEach(function(item) {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "data-item";
+
+        let imageHTML = "";
+
+        if (item.URL_GAMBAR) {
+
+            imageHTML = `
+                <br>
+                <img
+                    src="${escapeHTML(item.URL_GAMBAR)}"
+                    class="data-image"
+                    alt="Gambar"
+                    onerror="this.style.display='none'"
+                >
+            `;
+
+        }
+
+        div.innerHTML = `
+
+            <span class="data-category">
+                ${escapeHTML(item.KATEGORI || "-")}
+            </span>
+
+            <h3>
+                ${escapeHTML(item.JUDUL || "-")}
+            </h3>
+
+            <p>
+                ${escapeHTML(item.DESKRIPSI || "-")}
+            </p>
+
+            ${imageHTML}
+
+            <p>
+                <strong>👤 Pengisi:</strong>
+                ${escapeHTML(item.NAMA || "-")}
+            </p>
+
+            <p>
+                <strong>📅 Tanggal:</strong>
+                ${escapeHTML(item.TANGGAL || "-")}
+            </p>
+
+            <div class="data-actions">
+
+                <button
+                    class="edit-button"
+                    onclick="editData('${escapeHTML(item.ID)}')"
+                >
+                    ✏️ Edit
+                </button>
+
+                <button
+                    class="delete-button"
+                    onclick="deleteData('${escapeHTML(item.ID)}')"
+                >
+                    🗑️ Hapus
+                </button>
+
+            </div>
+
+        `;
+
+        dataList.appendChild(div);
+
+    });
+
+}
+
+
+/* ==============================
+   ESCAPE HTML
+============================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==============================
+   FORM SUBMIT
+============================== */
+
+dataForm.addEventListener(
+    "submit",
+    async function(event) {
+
         event.preventDefault();
 
+        saveButton.disabled = true;
+
+        saveButton.textContent =
+            "⏳ Menyimpan...";
+
         try {
-            const id = document.getElementById("dataId").value.trim();
 
             const payload = {
-                action: id ? "update" : "create",
-                token: token,
-                id: id,
-                nama: document.getElementById("nama").value.trim(),
-                judul: document.getElementById("judul").value.trim(),
-                kategori: document.getElementById("kategori").value,
-                deskripsi: document.getElementById("deskripsi").value.trim(),
-                urlGambar: document.getElementById("urlGambar").value.trim()
+
+                action:
+                    editingId
+                        ? "update"
+                        : "create",
+
+                token:
+                    token,
+
+                id:
+                    editingId || "",
+
+                nama:
+                    document.getElementById("nama").value.trim(),
+
+                judul:
+                    document.getElementById("judul").value.trim(),
+
+                kategori:
+                    document.getElementById("kategori").value,
+
+                deskripsi:
+                    document.getElementById("deskripsi").value.trim(),
+
+                urlGambar:
+                    document.getElementById("urlGambar").value.trim()
+
             };
 
-            if (!payload.nama || !payload.judul || !payload.kategori) {
-                showMessage("Nama, judul, dan kategori wajib diisi.", "error");
-                return;
+
+            const result =
+                await apiPost(payload);
+
+
+            if (!result.success) {
+
+                throw new Error(
+                    result.message ||
+                    "Gagal menyimpan data."
+                );
+
             }
 
-            showMessage("Menyimpan data...", "success");
-
-            await apiPost(payload);
 
             showMessage(
-                id ? "Data berhasil diperbarui." : "Data berhasil disimpan.",
+                editingId
+                    ? "Data berhasil diperbarui."
+                    : "Data berhasil ditambahkan.",
                 "success"
             );
 
-            clearForm();
-            await loadRecords();
+
+            resetForm();
+
+            await loadData();
+
 
         } catch (error) {
-            showMessage(error.message || "Gagal menyimpan data.", "error");
+
+            console.error(error);
+
+            showMessage(
+                error.message ||
+                "Terjadi kesalahan.",
+                "error"
+            );
+
         }
-    });
 
-    clearBtn.addEventListener("click", clearForm);
 
-    logoutBtn.addEventListener("click", function () {
-        sessionStorage.clear();
-        window.location.href = "admin-login.html";
-    });
+        saveButton.disabled = false;
 
-    if (!WEB_APP_URL || WEB_APP_URL.includes("PASTE_URL")) {
-        showMessage("URL Google Apps Script belum diatur.", "error");
-    } else {
-        loadRecords();
+        saveButton.textContent =
+            "💾 Simpan Data";
+
     }
-})();
+);
+
+
+/* ==============================
+   EDIT
+============================== */
+
+async function editData(id) {
+
+    try {
+
+        const response =
+            await fetch(
+                WEB_URL + "?action=list"
+            );
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message
+            );
+
+        }
+
+        const item =
+            result.data.find(
+                function(data) {
+                    return String(data.ID) === String(id);
+                }
+            );
+
+        if (!item) {
+
+            alert(
+                "Data tidak ditemukan."
+            );
+
+            return;
+
+        }
+
+        editingId =
+            item.ID;
+
+        document.getElementById("nama").value =
+            item.NAMA || "";
+
+        document.getElementById("judul").value =
+            item.JUDUL || "";
+
+        document.getElementById("kategori").value =
+            item.KATEGORI || "";
+
+        document.getElementById("deskripsi").value =
+            item.DESKRIPSI || "";
+
+        document.getElementById("urlGambar").value =
+            item.URL_GAMBAR || "";
+
+        formTitle.textContent =
+            "✏️ Edit Data Desa";
+
+        cancelButton.style.display =
+            "inline-block";
+
+        saveButton.textContent =
+            "💾 Simpan Perubahan";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "Gagal mengambil data untuk diedit.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   DELETE
+============================== */
+
+async function deleteData(id) {
+
+    const yakin =
+        confirm(
+            "Apakah kamu yakin ingin menghapus data ini?"
+        );
+
+    if (!yakin) {
+        return;
+    }
+
+    try {
+
+        const result =
+            await apiPost({
+
+                action: "delete",
+
+                token: token,
+
+                id: id
+
+            });
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Gagal menghapus data."
+            );
+
+        }
+
+
+        showMessage(
+            "Data berhasil dihapus.",
+            "success"
+        );
+
+
+        await loadData();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "Gagal menghapus data.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   CANCEL EDIT
+============================== */
+
+cancelButton.addEventListener(
+    "click",
+    function() {
+
+        resetForm();
+
+    }
+);
+
+
+/* ==============================
+   RESET FORM
+============================== */
+
+function resetForm() {
+
+    editingId = null;
+
+    dataForm.reset();
+
+    formTitle.textContent =
+        "➕ Tambah Data Desa";
+
+    cancelButton.style.display =
+        "none";
+
+    saveButton.textContent =
+        "💾 Simpan Data";
+
+}
+
+
+/* ==============================
+   LOGOUT
+============================== */
+
+document.getElementById(
+    "logoutButton"
+).addEventListener(
+    "click",
+    async function() {
+
+        try {
+
+            await apiPost({
+
+                action: "logout",
+
+                token: token
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+
+        sessionStorage.removeItem(
+            "desaAdminToken"
+        );
+
+        sessionStorage.removeItem(
+            "desaAdminLogin"
+        );
+
+        window.location.href =
+            "admin-login.html";
+
+    }
+);
+
+
+/* ==============================
+   MULAI
+============================== */
+
+loadData();
+
 </script>
+
 </body>
 </html>
