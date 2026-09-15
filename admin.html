@@ -212,6 +212,12 @@
             padding: 20px;
         }
 
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
         @media (max-width: 700px) {
 
             .admin-header-inner {
@@ -416,7 +422,7 @@
         <div id="dataList">
 
             <div class="loading">
-                Memuat data...
+                ⏳ Memuat data...
             </div>
 
         </div>
@@ -439,9 +445,9 @@ const WEB_URL =
         : "";
 
 
-/* ==============================
+/* =====================================================
    CEK LOGIN
-============================== */
+===================================================== */
 
 if (!token) {
 
@@ -451,9 +457,9 @@ if (!token) {
 }
 
 
-/* ==============================
+/* =====================================================
    ELEMENT
-============================== */
+===================================================== */
 
 const dataForm =
     document.getElementById("dataForm");
@@ -477,9 +483,9 @@ const formTitle =
 let editingId = null;
 
 
-/* ==============================
+/* =====================================================
    MESSAGE
-============================== */
+===================================================== */
 
 function showMessage(text, type) {
 
@@ -498,14 +504,15 @@ function showMessage(text, type) {
 }
 
 
-/* ==============================
+/* =====================================================
    POST API
-============================== */
+===================================================== */
 
 async function apiPost(data) {
 
     const formData =
         new URLSearchParams();
+
 
     Object.keys(data).forEach(function(key) {
 
@@ -516,19 +523,16 @@ async function apiPost(data) {
 
     });
 
+
     const response =
-        await fetch(WEB_URL, {
+        await fetch(
+            WEB_URL,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
 
-            method: "POST",
-
-            headers: {
-                "Content-Type":
-                    "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-
-            body: formData.toString()
-
-        });
 
     if (!response.ok) {
 
@@ -538,26 +542,30 @@ async function apiPost(data) {
 
     }
 
+
     return await response.json();
 
 }
 
 
-/* ==============================
+/* =====================================================
    LOAD DATA
-============================== */
+===================================================== */
 
 async function loadData() {
 
     dataList.innerHTML =
         '<div class="loading">⏳ Memuat data...</div>';
 
+
     try {
 
         const response =
             await fetch(
-                WEB_URL + "?action=list"
+                WEB_URL +
+                "?action=list"
             );
+
 
         if (!response.ok) {
 
@@ -567,8 +575,10 @@ async function loadData() {
 
         }
 
+
         const result =
             await response.json();
+
 
         if (!result.success) {
 
@@ -579,101 +589,159 @@ async function loadData() {
 
         }
 
+
         renderData(
             result.data || []
         );
 
+
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "LOAD ERROR:",
+            error
+        );
 
-        dataList.innerHTML =
-            "<p>❌ Gagal mengambil data dari database.</p>";
+
+        dataList.innerHTML = `
+            <div class="message error">
+                ❌ Gagal mengambil data dari database.
+                <br><br>
+                ${escapeHTML(error.message)}
+            </div>
+        `;
 
     }
 
 }
 
 
-/* ==============================
+/* =====================================================
    RENDER DATA
-============================== */
+===================================================== */
 
 function renderData(data) {
 
     if (!data.length) {
 
         dataList.innerHTML =
-            "<p>Belum ada data desa.</p>";
+            '<div class="empty">Belum ada data desa.</div>';
 
         return;
 
     }
 
+
     dataList.innerHTML = "";
 
+
     data.forEach(function(item) {
+
+        /*
+         * Code.gs menggunakan:
+         * id
+         * nama
+         * judul
+         * kategori
+         * deskripsi
+         * urlGambar
+         * tanggal
+         */
+
+
+        const id =
+            item.id ?? "";
+
+
+        const nama =
+            item.nama ?? "";
+
+
+        const judul =
+            item.judul ?? "";
+
+
+        const kategori =
+            item.kategori ?? "";
+
+
+        const deskripsi =
+            item.deskripsi ?? "";
+
+
+        const urlGambar =
+            item.urlGambar ?? "";
+
+
+        const tanggal =
+            item.tanggal ?? "";
+
 
         const div =
             document.createElement("div");
 
+
         div.className =
             "data-item";
 
+
         let imageHTML = "";
 
-        if (item.URL_GAMBAR) {
+
+        if (urlGambar) {
 
             imageHTML = `
                 <br>
+
                 <img
-                    src="${escapeHTML(item.URL_GAMBAR)}"
+                    src="${escapeHTML(urlGambar)}"
                     class="data-image"
-                    alt="Gambar"
+                    alt="Gambar ${escapeHTML(judul)}"
                     onerror="this.style.display='none'"
                 >
             `;
 
         }
 
+
         div.innerHTML = `
 
             <span class="data-category">
-                ${escapeHTML(item.KATEGORI || "-")}
+                ${escapeHTML(kategori || "-")}
             </span>
 
             <h3>
-                ${escapeHTML(item.JUDUL || "-")}
+                ${escapeHTML(judul || "-")}
             </h3>
 
             <p>
-                ${escapeHTML(item.DESKRIPSI || "-")}
+                ${escapeHTML(deskripsi || "-")}
             </p>
 
             ${imageHTML}
 
             <p>
                 <strong>👤 Pengisi:</strong>
-                ${escapeHTML(item.NAMA || "-")}
+                ${escapeHTML(nama || "-")}
             </p>
 
             <p>
                 <strong>📅 Tanggal:</strong>
-                ${escapeHTML(item.TANGGAL || "-")}
+                ${formatTanggal(tanggal)}
             </p>
 
             <div class="data-actions">
 
                 <button
                     class="edit-button"
-                    onclick="editData('${escapeHTML(item.ID)}')"
+                    onclick="editData('${escapeHTML(id)}')"
                 >
                     ✏️ Edit
                 </button>
 
                 <button
                     class="delete-button"
-                    onclick="deleteData('${escapeHTML(item.ID)}')"
+                    onclick="deleteData('${escapeHTML(id)}')"
                 >
                     🗑️ Hapus
                 </button>
@@ -682,6 +750,7 @@ function renderData(data) {
 
         `;
 
+
         dataList.appendChild(div);
 
     });
@@ -689,25 +758,80 @@ function renderData(data) {
 }
 
 
-/* ==============================
-   ESCAPE HTML
-============================== */
+/* =====================================================
+   FORMAT TANGGAL
+===================================================== */
 
-function escapeHTML(value) {
+function formatTanggal(tanggal) {
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    if (!tanggal) {
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(tanggal);
+
+
+    if (isNaN(date.getTime())) {
+
+        return escapeHTML(
+            String(tanggal)
+        );
+
+    }
+
+
+    return escapeHTML(
+        date.toLocaleDateString(
+            "id-ID",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        )
+    );
 
 }
 
 
-/* ==============================
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
    FORM SUBMIT
-============================== */
+===================================================== */
 
 dataForm.addEventListener(
     "submit",
@@ -715,10 +839,14 @@ dataForm.addEventListener(
 
         event.preventDefault();
 
-        saveButton.disabled = true;
+
+        saveButton.disabled =
+            true;
+
 
         saveButton.textContent =
             "⏳ Menyimpan...";
+
 
         try {
 
@@ -736,25 +864,41 @@ dataForm.addEventListener(
                     editingId || "",
 
                 nama:
-                    document.getElementById("nama").value.trim(),
+                    document
+                        .getElementById("nama")
+                        .value
+                        .trim(),
 
                 judul:
-                    document.getElementById("judul").value.trim(),
+                    document
+                        .getElementById("judul")
+                        .value
+                        .trim(),
 
                 kategori:
-                    document.getElementById("kategori").value,
+                    document
+                        .getElementById("kategori")
+                        .value,
 
                 deskripsi:
-                    document.getElementById("deskripsi").value.trim(),
+                    document
+                        .getElementById("deskripsi")
+                        .value
+                        .trim(),
 
                 urlGambar:
-                    document.getElementById("urlGambar").value.trim()
+                    document
+                        .getElementById("urlGambar")
+                        .value
+                        .trim()
 
             };
 
 
             const result =
-                await apiPost(payload);
+                await apiPost(
+                    payload
+                );
 
 
             if (!result.success) {
@@ -777,12 +921,17 @@ dataForm.addEventListener(
 
             resetForm();
 
+
             await loadData();
 
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "SAVE ERROR:",
+                error
+            );
+
 
             showMessage(
                 error.message ||
@@ -793,7 +942,9 @@ dataForm.addEventListener(
         }
 
 
-        saveButton.disabled = false;
+        saveButton.disabled =
+            false;
+
 
         saveButton.textContent =
             "💾 Simpan Data";
@@ -802,9 +953,9 @@ dataForm.addEventListener(
 );
 
 
-/* ==============================
-   EDIT
-============================== */
+/* =====================================================
+   EDIT DATA
+===================================================== */
 
 async function editData(id) {
 
@@ -812,26 +963,36 @@ async function editData(id) {
 
         const response =
             await fetch(
-                WEB_URL + "?action=list"
+                WEB_URL +
+                "?action=list"
             );
+
 
         const result =
             await response.json();
 
+
         if (!result.success) {
 
             throw new Error(
-                result.message
+                result.message ||
+                "Gagal mengambil data."
             );
 
         }
 
+
         const item =
-            result.data.find(
+            (result.data || []).find(
                 function(data) {
-                    return String(data.ID) === String(id);
+
+                    return String(
+                        data.id
+                    ) === String(id);
+
                 }
             );
+
 
         if (!item) {
 
@@ -843,41 +1004,69 @@ async function editData(id) {
 
         }
 
+
         editingId =
-            item.ID;
+            item.id;
 
-        document.getElementById("nama").value =
-            item.NAMA || "";
 
-        document.getElementById("judul").value =
-            item.JUDUL || "";
+        document
+            .getElementById("nama")
+            .value =
+            item.nama || "";
 
-        document.getElementById("kategori").value =
-            item.KATEGORI || "";
 
-        document.getElementById("deskripsi").value =
-            item.DESKRIPSI || "";
+        document
+            .getElementById("judul")
+            .value =
+            item.judul || "";
 
-        document.getElementById("urlGambar").value =
-            item.URL_GAMBAR || "";
+
+        document
+            .getElementById("kategori")
+            .value =
+            item.kategori || "";
+
+
+        document
+            .getElementById("deskripsi")
+            .value =
+            item.deskripsi || "";
+
+
+        document
+            .getElementById("urlGambar")
+            .value =
+            item.urlGambar || "";
+
 
         formTitle.textContent =
             "✏️ Edit Data Desa";
 
+
         cancelButton.style.display =
             "inline-block";
+
 
         saveButton.textContent =
             "💾 Simpan Perubahan";
 
+
         window.scrollTo({
+
             top: 0,
+
             behavior: "smooth"
+
         });
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "EDIT ERROR:",
+            error
+        );
+
 
         showMessage(
             "Gagal mengambil data untuk diedit.",
@@ -889,9 +1078,9 @@ async function editData(id) {
 }
 
 
-/* ==============================
-   DELETE
-============================== */
+/* =====================================================
+   DELETE DATA
+===================================================== */
 
 async function deleteData(id) {
 
@@ -900,20 +1089,27 @@ async function deleteData(id) {
             "Apakah kamu yakin ingin menghapus data ini?"
         );
 
+
     if (!yakin) {
+
         return;
+
     }
+
 
     try {
 
         const result =
             await apiPost({
 
-                action: "delete",
+                action:
+                    "delete",
 
-                token: token,
+                token:
+                    token,
 
-                id: id
+                id:
+                    id
 
             });
 
@@ -939,7 +1135,11 @@ async function deleteData(id) {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
+
 
         showMessage(
             error.message ||
@@ -952,9 +1152,9 @@ async function deleteData(id) {
 }
 
 
-/* ==============================
-   CANCEL EDIT
-============================== */
+/* =====================================================
+   BATAL EDIT
+===================================================== */
 
 cancelButton.addEventListener(
     "click",
@@ -966,21 +1166,26 @@ cancelButton.addEventListener(
 );
 
 
-/* ==============================
+/* =====================================================
    RESET FORM
-============================== */
+===================================================== */
 
 function resetForm() {
 
-    editingId = null;
+    editingId =
+        null;
+
 
     dataForm.reset();
+
 
     formTitle.textContent =
         "➕ Tambah Data Desa";
 
+
     cancelButton.style.display =
         "none";
+
 
     saveButton.textContent =
         "💾 Simpan Data";
@@ -988,51 +1193,57 @@ function resetForm() {
 }
 
 
-/* ==============================
+/* =====================================================
    LOGOUT
-============================== */
+===================================================== */
 
-document.getElementById(
-    "logoutButton"
-).addEventListener(
-    "click",
-    async function() {
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        async function() {
 
-        try {
+            try {
 
-            await apiPost({
+                await apiPost({
 
-                action: "logout",
+                    action:
+                        "logout",
 
-                token: token
+                    token:
+                        token
 
-            });
+                });
 
-        } catch (error) {
+            } catch (error) {
 
-            console.error(error);
+                console.error(
+                    error
+                );
+
+            }
+
+
+            sessionStorage.removeItem(
+                "desaAdminToken"
+            );
+
+
+            sessionStorage.removeItem(
+                "desaAdminLogin"
+            );
+
+
+            window.location.href =
+                "admin-login.html";
 
         }
+    );
 
 
-        sessionStorage.removeItem(
-            "desaAdminToken"
-        );
-
-        sessionStorage.removeItem(
-            "desaAdminLogin"
-        );
-
-        window.location.href =
-            "admin-login.html";
-
-    }
-);
-
-
-/* ==============================
+/* =====================================================
    MULAI
-============================== */
+===================================================== */
 
 loadData();
 
