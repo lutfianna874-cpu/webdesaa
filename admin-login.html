@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login Admin | Desa Sepinggan Gelik</title>
-
-    <link rel="stylesheet" href="style.css">
+    <title>Login Admin - Desa Sepinggan Gelik</title>
 
     <style>
         * {
@@ -16,113 +14,145 @@
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #dfead8, #f7f3df);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dfeee8, #f8f5ec);
         }
 
         .login-container {
-            width: 100%;
-            max-width: 430px;
-            padding: 20px;
+            width: 90%;
+            max-width: 620px;
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.96);
-            padding: 35px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            padding: 50px 48px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
 
-        .login-icon {
-            font-size: 55px;
-            margin-bottom: 10px;
+        .icon {
+            font-size: 70px;
+            margin-bottom: 15px;
         }
 
-        .login-box h1 {
-            margin: 5px 0;
-            color: #315b35;
+        h1 {
+            margin: 0;
+            font-size: 42px;
+            color: #111827;
         }
 
-        .login-box p {
-            color: #666;
-            margin-bottom: 25px;
+        .subtitle {
+            font-size: 24px;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            color: #374151;
         }
 
         .form-group {
             text-align: left;
-            margin-bottom: 18px;
+            margin-bottom: 25px;
         }
 
-        .form-group label {
+        label {
             display: block;
-            margin-bottom: 7px;
+            font-size: 20px;
             font-weight: bold;
-            color: #315b35;
+            margin-bottom: 10px;
+            color: #111827;
         }
 
-        .form-group input {
+        input {
             width: 100%;
-            padding: 13px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 18px;
+            border: 2px solid #b8c8d8;
+            border-radius: 15px;
+            font-size: 20px;
             outline: none;
         }
 
-        .form-group input:focus {
-            border-color: #5d8c61;
+        input:focus {
+            border-color: #397d68;
         }
 
         .login-button {
             width: 100%;
+            padding: 18px;
             border: none;
-            padding: 14px;
-            border-radius: 10px;
-            background: #4f7d52;
+            border-radius: 15px;
+            background: #397d68;
             color: white;
-            font-size: 16px;
+            font-size: 23px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .login-button:hover {
-            background: #3f6842;
+            background: #2f6857;
         }
 
         .login-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .back-button {
-            display: block;
-            margin-top: 15px;
-            color: #4f7d52;
-            text-decoration: none;
+            opacity: 0.7;
+            cursor: wait;
         }
 
         .message {
             display: none;
-            margin-top: 18px;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 14px;
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 17px;
+            line-height: 1.5;
         }
 
-        .message.error {
+        .error {
             display: block;
-            background: #ffe5e5;
-            color: #a00000;
+            background: #fce7eb;
+            color: #8b3040;
         }
 
-        .message.success {
+        .success {
             display: block;
-            background: #e2f5e4;
-            color: #246b2a;
+            background: #dff5e9;
+            color: #21623e;
+        }
+
+        .back {
+            display: block;
+            margin-top: 30px;
+            color: #607d8b;
+            text-decoration: none;
+            font-size: 19px;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .login-box {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 19px;
+            }
+
+            label {
+                font-size: 18px;
+            }
+
+            input {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -133,27 +163,22 @@
 
     <div class="login-box">
 
-        <div class="login-icon">
-            🔐
-        </div>
+        <div class="icon">🔐</div>
 
         <h1>LOGIN ADMIN</h1>
 
-        <p>
+        <div class="subtitle">
             Desa Sepinggan Gelik
-        </p>
+        </div>
 
         <form id="loginForm">
 
             <div class="form-group">
-                <label for="username">
-                    Username
-                </label>
+                <label for="username">Username</label>
 
                 <input
                     type="text"
                     id="username"
-                    name="username"
                     placeholder="Masukkan username"
                     autocomplete="username"
                     required
@@ -161,14 +186,11 @@
             </div>
 
             <div class="form-group">
-                <label for="password">
-                    Password
-                </label>
+                <label for="password">Password</label>
 
                 <input
                     type="password"
                     id="password"
-                    name="password"
                     placeholder="Masukkan password"
                     autocomplete="current-password"
                     required
@@ -185,15 +207,9 @@
 
         </form>
 
-        <div
-            id="message"
-            class="message"
-        ></div>
+        <div id="message" class="message"></div>
 
-        <a
-            href="index.html"
-            class="back-button"
-        >
+        <a href="index.html" class="back">
             ← Kembali ke Beranda
         </a>
 
@@ -205,127 +221,183 @@
 
 <script>
 
-const loginForm = document.getElementById("loginForm");
-const loginButton = document.getElementById("loginButton");
-const message = document.getElementById("message");
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const message = document.getElementById("message");
 
-function showMessage(text, type) {
+    let timeoutLogin = null;
 
-    message.textContent = text;
 
-    message.className = "message " + type;
-}
+    function showMessage(text, type) {
 
-loginForm.addEventListener("submit", async function(event) {
+        message.textContent = text;
 
-    event.preventDefault();
-
-    const username =
-        document.getElementById("username").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    if (!username || !password) {
-
-        showMessage(
-            "Username dan password wajib diisi.",
-            "error"
-        );
-
-        return;
+        message.className = "message " + type;
     }
 
-    loginButton.disabled = true;
-    loginButton.textContent = "⏳ MEMERIKSA...";
 
-    showMessage(
-        "Sedang memeriksa login...",
-        "success"
-    );
+    function loginBerhasil(data) {
 
-    try {
+        clearTimeout(timeoutLogin);
 
-        const formData = new URLSearchParams();
+        loginButton.disabled = false;
+        loginButton.textContent = "🔑 MASUK";
 
-        formData.append("action", "login");
-        formData.append("username", username);
-        formData.append("password", password);
-
-        const response = await fetch(WEB_APP_URL, {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type":
-                    "application/x-www-form-urlencoded;charset=UTF-8"
-            },
-
-            body: formData.toString()
-
-        });
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Server mengembalikan status " +
-                response.status
-            );
-        }
-
-        const result = await response.json();
-
-        console.log("HASIL LOGIN:", result);
-
-        if (result.success === true && result.token) {
+        if (data && data.success === true && data.token) {
 
             sessionStorage.setItem(
                 "desaAdminToken",
-                result.token
-            );
-
-            sessionStorage.setItem(
-                "desaAdminLogin",
-                username
+                data.token
             );
 
             showMessage(
-                "Login berhasil. Membuka dashboard...",
+                "Login berhasil. Mengarahkan ke dashboard...",
                 "success"
             );
 
-            setTimeout(function() {
+            setTimeout(function () {
 
                 window.location.href = "admin.html";
 
-            }, 500);
+            }, 700);
 
         } else {
 
             showMessage(
-                result.message ||
-                "Username atau password salah.",
+                data && data.message
+                    ? data.message
+                    : "Username atau password salah.",
                 "error"
             );
-
-            loginButton.disabled = false;
-            loginButton.textContent = "🔑 MASUK";
         }
+    }
 
-    } catch (error) {
 
-        console.error("LOGIN ERROR:", error);
+    function loginGagal() {
 
-        showMessage(
-            "Tidak dapat terhubung ke database. Pastikan URL Apps Script dan deployment sudah benar.",
-            "error"
-        );
+        clearTimeout(timeoutLogin);
 
         loginButton.disabled = false;
         loginButton.textContent = "🔑 MASUK";
+
+        showMessage(
+            "Tidak dapat terhubung ke database. Silakan coba lagi.",
+            "error"
+        );
     }
 
-});
+
+    loginForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        if (!username || !password) {
+
+            showMessage(
+                "Username dan password wajib diisi.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        loginButton.disabled = true;
+        loginButton.textContent = "⏳ MEMERIKSA...";
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        /*
+         * JSONP
+         * Digunakan agar GitHub Pages dapat
+         * berkomunikasi dengan Google Apps Script
+         * tanpa masalah CORS.
+         */
+
+        const callbackName =
+            "desaLoginCallback_" + Date.now();
+
+
+        window[callbackName] = function(data) {
+
+            loginBerhasil(data);
+
+            try {
+                delete window[callbackName];
+            } catch (e) {}
+
+            const script =
+                document.getElementById(callbackName);
+
+            if (script) {
+                script.remove();
+            }
+        };
+
+
+        const script =
+            document.createElement("script");
+
+        script.id = callbackName;
+
+        const url =
+            WEB_APP_URL +
+            "?action=login" +
+            "&username=" +
+            encodeURIComponent(username) +
+            "&password=" +
+            encodeURIComponent(password) +
+            "&callback=" +
+            encodeURIComponent(callbackName);
+
+
+        script.src = url;
+
+
+        script.onerror = function() {
+
+            loginGagal();
+
+            try {
+                delete window[callbackName];
+            } catch (e) {}
+
+            script.remove();
+        };
+
+
+        document.body.appendChild(script);
+
+
+        /*
+         * Jika terlalu lama tidak mendapat jawaban,
+         * tampilkan pesan koneksi.
+         */
+
+        timeoutLogin = setTimeout(function() {
+
+            if (window[callbackName]) {
+
+                loginGagal();
+
+                try {
+                    delete window[callbackName];
+                } catch (e) {}
+
+                script.remove();
+            }
+
+        }, 15000);
+
+    });
 
 </script>
 
