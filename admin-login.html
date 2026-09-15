@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Login Admin | Desa Sepinggan Gelik</title>
+    <title>
+        Login Admin - Desa Sepinggan Gelik
+    </title>
 
-    <link rel="stylesheet" href="style.css">
 
     <style>
 
@@ -16,167 +20,297 @@
             box-sizing: border-box;
         }
 
+
         body {
+
             margin: 0;
+
             min-height: 100vh;
+
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #315b35, #6d9365);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #365b3a,
+                    #557c58
+                );
+
             display: flex;
-            justify-content: center;
+
             align-items: center;
+
+            justify-content: center;
+
             padding: 20px;
+
         }
 
-        .login-container {
+
+        .login-box {
+
             width: 100%;
-            max-width: 420px;
-        }
 
-        .login-card {
+            max-width: 520px;
+
             background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+
+            border-radius: 28px;
+
+            padding: 45px 40px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,.20);
+
         }
 
-        .login-logo {
+
+        .logo {
+
             text-align: center;
-            font-size: 50px;
-            margin-bottom: 10px;
+
+            font-size: 75px;
+
+            margin-bottom: 25px;
+
         }
 
-        .login-card h1 {
+
+        h1 {
+
             text-align: center;
+
             margin: 0;
-            color: #315b35;
-            font-size: 25px;
+
+            color: #365b3a;
+
+            font-size: 40px;
+
         }
 
-        .login-card .subtitle {
+
+        .subtitle {
+
             text-align: center;
+
             color: #777;
-            margin: 8px 0 25px;
+
+            font-size: 23px;
+
+            margin-top: 15px;
+
+            margin-bottom: 40px;
+
         }
+
+
+        .error {
+
+            display: none;
+
+            background: #fde0e0;
+
+            color: #a52323;
+
+            padding: 17px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+            font-size: 17px;
+
+        }
+
 
         .form-group {
-            margin-bottom: 18px;
+
+            margin-bottom: 25px;
+
         }
 
-        .form-group label {
+
+        label {
+
             display: block;
-            margin-bottom: 7px;
+
+            color: #365b3a;
+
+            font-size: 21px;
+
             font-weight: bold;
-            color: #315b35;
+
+            margin-bottom: 10px;
+
         }
 
-        .form-group input {
+
+        input {
+
             width: 100%;
-            padding: 13px;
-            border: 1px solid #ccc;
-            border-radius: 9px;
-            font-size: 15px;
+
+            padding: 19px;
+
+            border-radius: 15px;
+
+            border: 2px solid #d0d0d0;
+
+            font-size: 20px;
+
             outline: none;
+
         }
 
-        .form-group input:focus {
-            border-color: #315b35;
+
+        input:focus {
+
+            border-color: #557c58;
+
         }
 
-        .login-button,
-        .home-button {
+
+        button {
+
             width: 100%;
-            padding: 13px;
+
             border: none;
-            border-radius: 9px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            display: block;
-            text-align: center;
-        }
 
-        .login-button {
-            background: #315b35;
+            padding: 20px;
+
+            border-radius: 16px;
+
+            background: #294d2d;
+
             color: white;
-            margin-top: 5px;
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
         }
 
-        .login-button:hover {
-            background: #24472a;
+
+        button:disabled {
+
+            opacity: .6;
+
+            cursor: wait;
+
         }
 
-        .home-button {
-            background: #eeeeee;
-            color: #315b35;
+
+        .back {
+
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
             text-decoration: none;
-            margin-top: 10px;
-        }
 
-        .home-button:hover {
-            background: #dddddd;
-        }
-
-        .message {
-            display: none;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .message.error {
-            display: block;
-            background: #ffe1e1;
-            color: #a00000;
-        }
-
-        .message.success {
-            display: block;
-            background: #e1f4e3;
-            color: #246b2a;
-        }
-
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .login-footer {
-            text-align: center;
             margin-top: 20px;
+
+            padding: 20px;
+
+            border-radius: 16px;
+
+            background: #eeeeee;
+
+            color: #365b3a;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 35px;
+
             color: #888;
-            font-size: 12px;
+
+            font-size: 17px;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .login-box {
+
+                padding: 35px 25px;
+
+                border-radius: 25px;
+
+            }
+
+
+            .logo {
+
+                font-size: 60px;
+
+            }
+
+
+            h1 {
+
+                font-size: 34px;
+
+            }
+
+
+            .subtitle {
+
+                font-size: 20px;
+
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-<div class="login-container">
 
-    <div class="login-card">
+    <div class="login-box">
 
-        <div class="login-logo">
+
+        <div class="logo">
             🌾
         </div>
+
 
         <h1>
             LOGIN ADMIN
         </h1>
 
-        <p class="subtitle">
-            Desa Sepinggan Gelik
-        </p>
 
-        <div
-            id="message"
-            class="message">
+        <div class="subtitle">
+            Desa Sepinggan Gelik
         </div>
 
+
+        <div
+            id="errorMessage"
+            class="error">
+        </div>
+
+
         <form id="loginForm">
+
 
             <div class="form-group">
 
@@ -187,10 +321,9 @@
                 <input
                     type="text"
                     id="username"
-                    placeholder="Masukkan username"
                     autocomplete="username"
-                    required
-                >
+                    placeholder="Masukkan username"
+                    required>
 
             </div>
 
@@ -204,229 +337,255 @@
                 <input
                     type="password"
                     id="password"
-                    placeholder="Masukkan password"
                     autocomplete="current-password"
-                    required
-                >
+                    placeholder="Masukkan password"
+                    required>
 
             </div>
 
 
             <button
                 type="submit"
-                id="loginButton"
-                class="login-button">
+                id="loginButton">
+
                 🔐 MASUK
+
             </button>
+
 
         </form>
 
 
         <a
             href="index.html"
-            class="home-button">
+            class="back">
+
             🏠 KEMBALI KE BERANDA
+
         </a>
 
 
-        <div class="login-footer">
+        <div class="footer">
+
             Sistem Admin Desa Sepinggan Gelik
+
         </div>
+
 
     </div>
 
-</div>
+
+    <script src="config.js"></script>
 
 
-<script src="config.js"></script>
-
-<script>
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-const message =
-    document.getElementById("message");
+    <script>
 
 
-const WEB_URL =
-    typeof WEB_APP_URL !== "undefined"
-        ? WEB_APP_URL
-        : "";
+        /* =================================================
+           URL DATABASE
+        ================================================= */
+
+        const WEB_URL =
+            typeof WEB_APP_URL !== "undefined"
+                ? WEB_APP_URL
+                : "";
 
 
-/* =========================================
-   PESAN
-========================================= */
+        /* =================================================
+           ELEMENT
+        ================================================= */
 
-function showMessage(text, type) {
-
-    message.textContent = text;
-
-    message.className =
-        "message " + type;
-
-}
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-loginForm.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        const username =
-            document
-                .getElementById("username")
-                .value
-                .trim();
-
-
-        const password =
-            document
-                .getElementById("password")
-                .value;
-
-
-        if (!WEB_URL) {
-
-            showMessage(
-                "URL database belum terhubung.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        loginButton.disabled =
-            true;
-
-        loginButton.textContent =
-            "⏳ MEMERIKSA...";
-
-
-        try {
-
-            const formData =
-                new URLSearchParams();
-
-            formData.append(
-                "action",
-                "login"
-            );
-
-            formData.append(
-                "username",
-                username
-            );
-
-            formData.append(
-                "password",
-                password
+        const form =
+            document.getElementById(
+                "loginForm"
             );
 
 
-            const response =
-                await fetch(
-                    WEB_URL,
-                    {
-                        method: "POST",
-                        body: formData
+        const button =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        const errorBox =
+            document.getElementById(
+                "errorMessage"
+            );
+
+
+        /* =================================================
+           LOGIN
+        ================================================= */
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                errorBox.style.display =
+                    "none";
+
+
+                const username =
+                    document
+                        .getElementById(
+                            "username"
+                        )
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById(
+                            "password"
+                        )
+                        .value;
+
+
+                if (!WEB_URL) {
+
+                    showError(
+                        "URL database belum ditemukan. Periksa config.js."
+                    );
+
+                    return;
+
+                }
+
+
+                button.disabled =
+                    true;
+
+
+                button.textContent =
+                    "⏳ MEMERIKSA...";
+
+
+                try {
+
+
+                    /*
+                     * LOGIN MENGGUNAKAN GET
+                     * agar tidak terkena masalah
+                     * POST/404 sebelumnya.
+                     */
+
+                    const url =
+                        WEB_URL +
+                        "?action=login" +
+                        "&username=" +
+                        encodeURIComponent(
+                            username
+                        ) +
+                        "&password=" +
+                        encodeURIComponent(
+                            password
+                        );
+
+
+                    const response =
+                        await fetch(url);
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Server error: HTTP " +
+                            response.status
+                        );
+
                     }
-                );
 
 
-            if (!response.ok) {
-
-                throw new Error(
-                    "Server error: HTTP " +
-                    response.status
-                );
-
-            }
+                    const result =
+                        await response.json();
 
 
-            const result =
-                await response.json();
+                    if (
+                        !result.success
+                    ) {
+
+                        throw new Error(
+                            result.message ||
+                            "Username atau password salah."
+                        );
+
+                    }
 
 
-            if (!result.success) {
+                    /*
+                     * SIMPAN TOKEN
+                     */
 
-                throw new Error(
-                    result.message ||
-                    "Username atau password salah."
-                );
-
-            }
-
-
-            sessionStorage.setItem(
-                "desaAdminToken",
-                result.token
-            );
+                    sessionStorage.setItem(
+                        "desaAdminToken",
+                        result.token
+                    );
 
 
-            sessionStorage.setItem(
-                "desaAdminLogin",
-                username
-            );
+                    sessionStorage.setItem(
+                        "desaAdminLogin",
+                        "true"
+                    );
 
 
-            showMessage(
-                "Login berhasil. Membuka dashboard...",
-                "success"
-            );
-
-
-            setTimeout(
-                function() {
+                    /*
+                     * MASUK DASHBOARD
+                     */
 
                     window.location.href =
                         "admin.html";
 
-                },
-                500
-            );
+                }
 
 
-        } catch (error) {
+                catch (error) {
 
-            console.error(
-                "LOGIN ERROR:",
-                error
-            );
-
-
-            showMessage(
-                error.message ||
-                "Login gagal. Periksa koneksi database.",
-                "error"
-            );
+                    console.error(
+                        error
+                    );
 
 
-            loginButton.disabled =
-                false;
+                    showError(
+                        error.message
+                    );
 
 
-            loginButton.textContent =
-                "🔐 MASUK";
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        "🔐 MASUK";
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           ERROR
+        ================================================= */
+
+        function showError(message) {
+
+            errorBox.textContent =
+                message;
+
+
+            errorBox.style.display =
+                "block";
 
         }
 
-    }
-);
 
-</script>
+    </script>
+
 
 </body>
+
 </html>
