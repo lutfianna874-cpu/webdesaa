@@ -4,419 +4,300 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="icon" type="image/png" href="./logo.png?v=2">
-
-    <title>Kirim Data - Desa Sepinggan Gelik</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #e8f5e9, #f5fff6);
-            color: #333;
-            min-height: 100vh;
-        }
-
+<title>Kirim Data - Desa Sepinggan Gelik</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e8f5e9, #f5fff6);
+        color: #333;
+        min-height: 100vh;
+    }
+    .container {
+        width: min(92%, 650px);
+        margin: 40px auto;
+    }
+    .back {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #075e54;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+    }
+    h1 {
+        margin-top: 0;
+        text-align: center;
+        color: #075e54;
+    }
+    .sub {
+        text-align: center;
+        color: #666;
+        margin-bottom: 28px;
+        line-height: 1.6;
+    }
+    label {
+        display: block;
+        margin-top: 16px;
+        margin-bottom: 7px;
+        font-weight: bold;
+    }
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #ccc;
+        border-radius: 9px;
+        font-size: 15px;
+        font-family: inherit;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #075e54;
+        box-shadow: 0 0 0 2px rgba(7,94,84,0.10);
+    }
+    textarea {
+        min-height: 130px;
+        resize: vertical;
+    }
+    .info {
+        background: #e8f5e9;
+        border-left: 4px solid #075e54;
+        padding: 12px 14px;
+        margin-bottom: 20px;
+        border-radius: 7px;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+    button {
+        width: 100%;
+        margin-top: 25px;
+        padding: 14px;
+        border: none;
+        border-radius: 9px;
+        background: #075e54;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #064e46;
+    }
+    button:disabled {
+        background: #999;
+        cursor: not-allowed;
+    }
+    #pesan {
+        margin-top: 18px;
+        text-align: center;
+        font-weight: bold;
+        min-height: 24px;
+    }
+    .success {
+        color: #087f5b;
+    }
+    .error {
+        color: #c62828;
+    }
+    .required {
+        color: red;
+    }
+    @media (max-width: 600px) {
         .container {
-            width: min(92%, 650px);
-            margin: 40px auto;
+            margin: 20px auto;
         }
-
-        .back {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #075e54;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+            padding: 22px;
         }
-
-        h1 {
-            margin-top: 0;
-            text-align: center;
-            color: #075e54;
-        }
-
-        .sub {
-            text-align: center;
-            color: #666;
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-
-        label {
-            display: block;
-            margin-top: 16px;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #ccc;
-            border-radius: 9px;
-            font-size: 15px;
-            font-family: inherit;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #075e54;
-            box-shadow: 0 0 0 2px rgba(7,94,84,0.10);
-        }
-
-        textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        .info {
-            background: #e8f5e9;
-            border-left: 4px solid #075e54;
-            padding: 12px 14px;
-            margin-bottom: 20px;
-            border-radius: 7px;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 14px;
-            border: none;
-            border-radius: 9px;
-            background: #075e54;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #064e46;
-        }
-
-        button:disabled {
-            background: #999;
-            cursor: not-allowed;
-        }
-
-        #pesan {
-            margin-top: 18px;
-            text-align: center;
-            font-weight: bold;
-            min-height: 24px;
-        }
-
-        .success {
-            color: #087f5b;
-        }
-
-        .error {
-            color: #c62828;
-        }
-
-        .required {
-            color: red;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px auto;
-            }
-
-            .card {
-                padding: 22px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
-
 <body>
-
 <div class="container">
-
-    <a href="index.html" class="back">← Kembali ke Website</a>
-
-    <div class="card">
-
-        <h1>📝 Kirim Data Desa</h1>
-
-        <p class="sub">
-            Silakan bantu melengkapi informasi Desa Sepinggan Gelik
-            dengan mengirimkan data, kegiatan, keindahan, atau informasi
-            lainnya.
-        </p>
-
-        <div class="info">
-            <strong>ℹ️ Informasi:</strong><br>
-            Data yang kamu kirim akan langsung masuk ke database
-            Desa Sepinggan Gelik dan dapat ditampilkan pada website.
-        </div>
-
-        <form id="formData">
-
-            <label for="nama">
-                Nama <span class="required">*</span>
-            </label>
-
-            <input
-                type="text"
-                id="nama"
-                name="nama"
-                placeholder="Masukkan nama"
-                maxlength="100"
-                required
-            >
-
-            <label for="judul">
-                Judul <span class="required">*</span>
-            </label>
-
-            <input
-                type="text"
-                id="judul"
-                name="judul"
-                placeholder="Contoh: Kegiatan Gotong Royong Desa"
-                maxlength="150"
-                required
-            >
-
-            <label for="kategori">
-                Kategori <span class="required">*</span>
-            </label>
-
-            <select id="kategori" name="kategori" required>
-
-                <option value="">
-                    -- Pilih Kategori --
-                </option>
-
-                <option value="Beranda">
-                    Beranda
-                </option>
-
-                <option value="Profil Desa">
-                    Profil Desa
-                </option>
-
-                <option value="Keindahan">
-                    Keindahan
-                </option>
-
-                <option value="Kegiatan">
-                    Kegiatan
-                </option>
-
-                <option value="Lokasi">
-                    Lokasi
-                </option>
-
-            </select>
-
-            <label for="deskripsi">
-                Deskripsi <span class="required">*</span>
-            </label>
-
-            <textarea
-                id="deskripsi"
-                name="deskripsi"
-                placeholder="Tuliskan informasi atau cerita tentang data tersebut..."
-                maxlength="1000"
-                required
-            ></textarea>
-
-            <label for="urlGambar">
-                URL Gambar
-            </label>
-
-            <input
-                type="url"
-                id="urlGambar"
-                name="urlGambar"
-                placeholder="https://contoh.com/foto.jpg"
-            >
-
-            <label for="tanggal">
-                Tanggal
-            </label>
-
-            <input
-                type="date"
-                id="tanggal"
-                name="tanggal"
-            >
-
-            <button type="submit" id="btnKirim">
-                📤 Kirim Data
-            </button>
-
-            <div id="pesan"></div>
-
-        </form>
-
+<a href="index.html" class="back">← Kembali ke Website</a>
+<div class="card">
+    <h1>📝 Kirim Data Desa</h1>
+    <p class="sub">
+        Silakan bantu melengkapi informasi Desa Sepinggan Gelik
+        dengan mengirimkan data, kegiatan, keindahan, atau informasi
+        lainnya.
+    </p>
+    <div class="info">
+        <strong>ℹ️ Informasi:</strong><br>
+        Data yang kamu kirim akan langsung masuk ke database
+        Desa Sepinggan Gelik dan dapat ditampilkan pada website.
     </div>
-
+    <form id="formData">
+        <label for="nama">
+            Nama <span class="required">*</span>
+        </label>
+        <input
+            type="text"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama"
+            maxlength="100"
+            required
+        >
+        <label for="judul">
+            Judul <span class="required">*</span>
+        </label>
+        <input
+            type="text"
+            id="judul"
+            name="judul"
+            placeholder="Contoh: Kegiatan Gotong Royong Desa"
+            maxlength="150"
+            required
+        >
+        <label for="kategori">
+            Kategori <span class="required">*</span>
+        </label>
+        <select id="kategori" name="kategori" required>
+            <option value="">
+                -- Pilih Kategori --
+            </option>
+            <option value="Beranda">
+                Beranda
+            </option>
+            <option value="Profil Desa">
+                Profil Desa
+            </option>
+            <option value="Keindahan">
+                Keindahan
+            </option>
+            <option value="Kegiatan">
+                Kegiatan
+            </option>
+            <option value="Lokasi">
+                Lokasi
+            </option>
+        </select>
+        <label for="deskripsi">
+            Deskripsi <span class="required">*</span>
+        </label>
+        <textarea
+            id="deskripsi"
+            name="deskripsi"
+            placeholder="Tuliskan informasi atau cerita tentang data tersebut..."
+            maxlength="1000"
+            required
+        ></textarea>
+        <label for="urlGambar">
+            URL Gambar
+        </label>
+        <input
+            type="url"
+            id="urlGambar"
+            name="urlGambar"
+            placeholder="https://contoh.com/foto.jpg"
+        >
+        <label for="tanggal">
+            Tanggal
+        </label>
+        <input
+            type="date"
+            id="tanggal"
+            name="tanggal"
+        >
+        <button type="submit" id="btnKirim">
+            📤 Kirim Data
+        </button>
+        <div id="pesan"></div>
+    </form>
 </div>
-
-
+</div>
 <script>
-
 /* =====================================================
    URL GOOGLE APPS SCRIPT
 ===================================================== */
-
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzN1j6Bhyy8_RZTvsK-aPzVNxKlG0JPtqLNzhJueziXDvt0isxag3VrTkiwtzxn1fU/exec";
-
-
 /* =====================================================
    FORM KIRIM DATA
 ===================================================== */
-
 const form =
     document.getElementById("formData");
-
 const tombol =
     document.getElementById("btnKirim");
-
 const pesan =
     document.getElementById("pesan");
-
-
 form.addEventListener("submit", async function(event) {
-
     event.preventDefault();
-
     tombol.disabled = true;
-
     tombol.textContent = "⏳ Mengirim...";
-
     pesan.textContent = "";
-
     pesan.className = "";
-
-
     const nama =
         document.getElementById("nama").value.trim();
-
     const judul =
         document.getElementById("judul").value.trim();
-
     const kategori =
         document.getElementById("kategori").value;
-
     const deskripsi =
         document.getElementById("deskripsi").value.trim();
-
     const urlGambar =
         document.getElementById("urlGambar").value.trim();
-
     const tanggal =
         document.getElementById("tanggal").value;
-
-
     if (!nama || !judul || !kategori || !deskripsi) {
-
         pesan.textContent =
             "⚠️ Silakan lengkapi semua data yang wajib diisi.";
-
         pesan.className = "error";
-
         tombol.disabled = false;
-
         tombol.textContent = "📤 Kirim Data";
-
         return;
     }
-
-
     try {
-
         const params = new URLSearchParams();
-
         params.append("action", "submit");
-
         params.append("nama", nama);
-
         params.append("judul", judul);
-
         params.append("kategori", kategori);
-
         params.append("deskripsi", deskripsi);
-
         params.append("urlGambar", urlGambar);
-
         params.append("tanggal", tanggal);
-
-
         const response = await fetch(
             WEB_APP_URL + "?" + params.toString()
         );
-
-
         const result =
             await response.json();
-
-
         if (
             result &&
             result.success === true
         ) {
-
             pesan.textContent =
                 "✅ Data berhasil dikirim dan langsung masuk ke database.";
-
             pesan.className = "success";
-
-
             form.reset();
-
         } else {
-
             throw new Error(
                 result && result.message
                     ? result.message
                     : "Data gagal dikirim."
             );
-
         }
-
-
     } catch (error) {
-
         console.error(error);
-
         pesan.textContent =
             "❌ Data gagal dikirim. Silakan coba lagi.";
-
         pesan.className = "error";
-
     }
-
-
     tombol.disabled = false;
-
     tombol.textContent = "📤 Kirim Data";
-
 });
-
 </script>
-
 </body>
 </html>
