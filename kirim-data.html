@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Kirim Data - Desa Sepinggan Gelik</title>
 
+    <link rel="icon"
+          type="image/png"
+          href="./logo.png?v=2">
+
+    <link rel="stylesheet"
+          href="style.css">
+
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -19,10 +31,74 @@
             min-height: 100vh;
         }
 
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        header {
+            width: 100%;
+            background: rgba(255,255,255,0.96);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1000;
+        }
+
+        header .logo {
+            padding: 18px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #075e54;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 0 15px 15px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 12px;
+            color: #075e54;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #e8f5e9;
+        }
+
+        nav a.active {
+            background: #075e54;
+            color: white;
+        }
+
+        nav .admin-login-link {
+            background: #075e54;
+            color: white;
+        }
+
+        nav .admin-login-link:hover {
+            background: #064e46;
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
         .container {
             width: min(92%, 650px);
             margin: 40px auto;
         }
+
 
         .back {
             display: inline-block;
@@ -32,6 +108,11 @@
             font-weight: bold;
         }
 
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
         .card {
             background: white;
             padding: 30px;
@@ -39,11 +120,13 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.10);
         }
 
+
         h1 {
             margin-top: 0;
             text-align: center;
             color: #075e54;
         }
+
 
         .sub {
             text-align: center;
@@ -52,12 +135,18 @@
             line-height: 1.6;
         }
 
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
         label {
             display: block;
             margin-top: 16px;
             margin-bottom: 7px;
             font-weight: bold;
         }
+
 
         input,
         select,
@@ -70,18 +159,27 @@
             font-family: inherit;
         }
 
+
         input:focus,
         select:focus,
         textarea:focus {
             outline: none;
             border-color: #075e54;
-            box-shadow: 0 0 0 2px rgba(7,94,84,0.10);
+            box-shadow:
+                0 0 0 2px
+                rgba(7,94,84,0.10);
         }
+
 
         textarea {
             min-height: 130px;
             resize: vertical;
         }
+
+
+        /* =====================================================
+           INFO
+        ===================================================== */
 
         .info {
             background: #e8f5e9;
@@ -92,6 +190,11 @@
             line-height: 1.5;
             font-size: 14px;
         }
+
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
 
         button {
             width: 100%;
@@ -106,14 +209,17 @@
             cursor: pointer;
         }
 
+
         button:hover {
             background: #064e46;
         }
+
 
         button:disabled {
             background: #999;
             cursor: not-allowed;
         }
+
 
         #pesan {
             margin-top: 18px;
@@ -122,19 +228,41 @@
             min-height: 24px;
         }
 
+
         .success {
             color: #087f5b;
         }
+
 
         .error {
             color: #c62828;
         }
 
+
         .required {
             color: red;
         }
 
-        @media (max-width: 600px) {
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            header .logo {
+                text-align: center;
+            }
+
+            nav {
+                gap: 3px;
+            }
+
+            nav a {
+                font-size: 11px;
+                padding: 8px 7px;
+            }
+
             .container {
                 margin: 20px auto;
             }
@@ -142,37 +270,162 @@
             .card {
                 padding: 22px;
             }
+
         }
+
+
+        @media (max-width: 480px) {
+
+            nav {
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 10px;
+                padding: 7px 5px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+        🌾 <span>SEPINGGAN GELIK</span>
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            BERANDA
+        </a>
+
+
+        <a href="profil.html">
+            PROFIL DESA
+        </a>
+
+
+        <a href="keindahan.html">
+            KEINDAHAN
+        </a>
+
+
+        <a href="kegiatan.html">
+            KEGIATAN
+        </a>
+
+
+        <a href="lokasi.html">
+            LOKASI
+        </a>
+
+
+        <!-- KIRIM DATA -->
+
+        <a href="kirim-data.html" class="active">
+            📝 KIRIM DATA
+        </a>
+
+
+        <!-- LOGIN ADMIN -->
+
+        <a href="admin-login.html"
+           class="admin-login-link">
+
+            🔐 LOGIN ADMIN
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     MUSIK DESA
+===================================================== -->
+
+<audio id="musikDesa" loop>
+
+    <source
+        src="lagu-desa.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- =====================================================
+     FORM KIRIM DATA
+===================================================== -->
+
 <div class="container">
 
-    <a href="index.html" class="back">← Kembali ke Website</a>
+
+    <a href="index.html"
+       class="back">
+
+        ← Kembali ke Website
+
+    </a>
+
 
     <div class="card">
 
-        <h1>📝 Kirim Data Desa</h1>
+
+        <h1>
+            📝 Kirim Data Desa
+        </h1>
+
 
         <p class="sub">
-            Silakan bantu melengkapi informasi Desa Sepinggan Gelik
-            dengan mengirimkan data, kegiatan, keindahan, atau informasi
+
+            Silakan bantu melengkapi informasi
+            Desa Sepinggan Gelik dengan mengirimkan
+            data, kegiatan, keindahan, atau informasi
             lainnya.
+
         </p>
 
+
         <div class="info">
+
             <strong>ℹ️ Informasi:</strong><br>
-            Data yang kamu kirim akan langsung masuk ke database
-            Desa Sepinggan Gelik dan dapat ditampilkan pada website.
+
+            Data yang kamu kirim akan langsung masuk
+            ke database Desa Sepinggan Gelik dan
+            dapat ditampilkan pada website.
+
         </div>
+
+
 
         <form id="formData">
 
+
+            <!-- NAMA -->
+
             <label for="nama">
-                Nama <span class="required">*</span>
+
+                Nama
+                <span class="required">*</span>
+
             </label>
+
 
             <input
                 type="text"
@@ -180,12 +433,19 @@
                 name="nama"
                 placeholder="Masukkan nama"
                 maxlength="100"
-                required
-            >
+                required>
+
+
+
+            <!-- JUDUL -->
 
             <label for="judul">
-                Judul <span class="required">*</span>
+
+                Judul
+                <span class="required">*</span>
+
             </label>
+
 
             <input
                 type="text"
@@ -193,14 +453,24 @@
                 name="judul"
                 placeholder="Contoh: Kegiatan Gotong Royong Desa"
                 maxlength="150"
-                required
-            >
+                required>
+
+
+
+            <!-- KATEGORI -->
 
             <label for="kategori">
-                Kategori <span class="required">*</span>
+
+                Kategori
+                <span class="required">*</span>
+
             </label>
 
-            <select id="kategori" name="kategori" required>
+
+            <select
+                id="kategori"
+                name="kategori"
+                required>
 
                 <option value="">
                     -- Pilih Kategori --
@@ -228,51 +498,86 @@
 
             </select>
 
+
+
+            <!-- DESKRIPSI -->
+
             <label for="deskripsi">
-                Deskripsi <span class="required">*</span>
+
+                Deskripsi
+                <span class="required">*</span>
+
             </label>
+
 
             <textarea
                 id="deskripsi"
                 name="deskripsi"
                 placeholder="Tuliskan informasi atau cerita tentang data tersebut..."
                 maxlength="1000"
-                required
-            ></textarea>
+                required></textarea>
+
+
+
+            <!-- URL GAMBAR -->
 
             <label for="urlGambar">
+
                 URL Gambar
+
             </label>
+
 
             <input
                 type="url"
                 id="urlGambar"
                 name="urlGambar"
-                placeholder="https://contoh.com/foto.jpg"
-            >
+                placeholder="https://contoh.com/foto.jpg">
+
+
+
+            <!-- TANGGAL -->
 
             <label for="tanggal">
+
                 Tanggal
+
             </label>
+
 
             <input
                 type="date"
                 id="tanggal"
-                name="tanggal"
-            >
+                name="tanggal">
 
-            <button type="submit" id="btnKirim">
+
+
+            <!-- TOMBOL -->
+
+            <button
+                type="submit"
+                id="btnKirim">
+
                 📤 Kirim Data
+
             </button>
+
 
             <div id="pesan"></div>
 
+
         </form>
+
 
     </div>
 
 </div>
 
+
+
+<!-- =====================================================
+     SCRIPT
+===================================================== -->
 
 <script>
 
@@ -284,138 +589,306 @@ const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbzN1j6Bhyy8_RZTvsK-aPzVNxKlG0JPtqLNzhJueziXDvt0isxag3VrTkiwtzxn1fU/exec";
 
 
+
+/* =====================================================
+   MUSIK
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const musik =
+            document.getElementById(
+                "musikDesa"
+            );
+
+
+        if (!musik) {
+            return;
+        }
+
+
+        const waktu =
+            localStorage.getItem(
+                "musicTime"
+            );
+
+
+        if (waktu) {
+
+            musik.currentTime =
+                parseFloat(waktu);
+
+        }
+
+
+        if (
+            localStorage.getItem(
+                "musicPlaying"
+            ) === "true"
+        ) {
+
+            musik.play()
+                .catch(function () {});
+
+        }
+
+
+        musik.addEventListener(
+            "timeupdate",
+            function () {
+
+                localStorage.setItem(
+                    "musicTime",
+                    musik.currentTime
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
 /* =====================================================
    FORM KIRIM DATA
 ===================================================== */
 
 const form =
-    document.getElementById("formData");
+    document.getElementById(
+        "formData"
+    );
+
 
 const tombol =
-    document.getElementById("btnKirim");
+    document.getElementById(
+        "btnKirim"
+    );
+
 
 const pesan =
-    document.getElementById("pesan");
+    document.getElementById(
+        "pesan"
+    );
 
 
-form.addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+form.addEventListener(
+    "submit",
+    async function(event) {
 
-    tombol.disabled = true;
-
-    tombol.textContent = "⏳ Mengirim...";
-
-    pesan.textContent = "";
-
-    pesan.className = "";
+        event.preventDefault();
 
 
-    const nama =
-        document.getElementById("nama").value.trim();
-
-    const judul =
-        document.getElementById("judul").value.trim();
-
-    const kategori =
-        document.getElementById("kategori").value;
-
-    const deskripsi =
-        document.getElementById("deskripsi").value.trim();
-
-    const urlGambar =
-        document.getElementById("urlGambar").value.trim();
-
-    const tanggal =
-        document.getElementById("tanggal").value;
+        tombol.disabled = true;
 
 
-    if (!nama || !judul || !kategori || !deskripsi) {
+        tombol.textContent =
+            "⏳ Mengirim...";
+
 
         pesan.textContent =
-            "⚠️ Silakan lengkapi semua data yang wajib diisi.";
-
-        pesan.className = "error";
-
-        tombol.disabled = false;
-
-        tombol.textContent = "📤 Kirim Data";
-
-        return;
-    }
+            "";
 
 
-    try {
-
-        const params = new URLSearchParams();
-
-        params.append("action", "submit");
-
-        params.append("nama", nama);
-
-        params.append("judul", judul);
-
-        params.append("kategori", kategori);
-
-        params.append("deskripsi", deskripsi);
-
-        params.append("urlGambar", urlGambar);
-
-        params.append("tanggal", tanggal);
+        pesan.className =
+            "";
 
 
-        const response = await fetch(
-            WEB_APP_URL + "?" + params.toString()
-        );
+
+        const nama =
+            document
+                .getElementById("nama")
+                .value
+                .trim();
 
 
-        const result =
-            await response.json();
+        const judul =
+            document
+                .getElementById("judul")
+                .value
+                .trim();
+
+
+        const kategori =
+            document
+                .getElementById("kategori")
+                .value;
+
+
+        const deskripsi =
+            document
+                .getElementById("deskripsi")
+                .value
+                .trim();
+
+
+        const urlGambar =
+            document
+                .getElementById("urlGambar")
+                .value
+                .trim();
+
+
+        const tanggal =
+            document
+                .getElementById("tanggal")
+                .value;
+
 
 
         if (
-            result &&
-            result.success === true
+            !nama ||
+            !judul ||
+            !kategori ||
+            !deskripsi
         ) {
 
             pesan.textContent =
-                "✅ Data berhasil dikirim dan langsung masuk ke database.";
-
-            pesan.className = "success";
+                "⚠️ Silakan lengkapi semua data yang wajib diisi.";
 
 
-            form.reset();
+            pesan.className =
+                "error";
 
-        } else {
 
-            throw new Error(
-                result && result.message
-                    ? result.message
-                    : "Data gagal dikirim."
-            );
+            tombol.disabled =
+                false;
+
+
+            tombol.textContent =
+                "📤 Kirim Data";
+
+
+            return;
 
         }
 
 
-    } catch (error) {
 
-        console.error(error);
+        try {
 
-        pesan.textContent =
-            "❌ Data gagal dikirim. Silakan coba lagi.";
+            const params =
+                new URLSearchParams();
 
-        pesan.className = "error";
+
+            params.append(
+                "action",
+                "submit"
+            );
+
+
+            params.append(
+                "nama",
+                nama
+            );
+
+
+            params.append(
+                "judul",
+                judul
+            );
+
+
+            params.append(
+                "kategori",
+                kategori
+            );
+
+
+            params.append(
+                "deskripsi",
+                deskripsi
+            );
+
+
+            params.append(
+                "urlGambar",
+                urlGambar
+            );
+
+
+            params.append(
+                "tanggal",
+                tanggal
+            );
+
+
+
+            const response =
+                await fetch(
+                    WEB_APP_URL +
+                    "?" +
+                    params.toString()
+                );
+
+
+
+            const result =
+                await response.json();
+
+
+
+            if (
+                result &&
+                result.success === true
+            ) {
+
+                pesan.textContent =
+                    "✅ Data berhasil dikirim dan langsung masuk ke database.";
+
+
+                pesan.className =
+                    "success";
+
+
+                form.reset();
+
+            } else {
+
+                throw new Error(
+                    result &&
+                    result.message
+                        ? result.message
+                        : "Data gagal dikirim."
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            pesan.textContent =
+                "❌ Data gagal dikirim. Silakan coba lagi.";
+
+
+            pesan.className =
+                "error";
+
+        }
+
+
+
+        tombol.disabled =
+            false;
+
+
+        tombol.textContent =
+            "📤 Kirim Data";
 
     }
-
-
-    tombol.disabled = false;
-
-    tombol.textContent = "📤 Kirim Data";
-
-});
+);
 
 </script>
 
+
 </body>
+
 </html>
