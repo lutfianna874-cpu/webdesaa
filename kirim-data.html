@@ -1,303 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="image/png" href="./logo.png?v=2">
-<title>Kirim Data - Desa Sepinggan Gelik</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./logo.png?v=2">
+<title>Pengaduan Masyarakat - Desa Sepinggan Gelik</title>
 <style>
-    * {
-        box-sizing: border-box;
-    }
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #e8f5e9, #f5fff6);
-        color: #333;
-        min-height: 100vh;
-    }
-    .container {
-        width: min(92%, 650px);
-        margin: 40px auto;
-    }
-    .back {
-        display: inline-block;
-        margin-bottom: 20px;
-        color: #075e54;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .card {
-        background: white;
-        padding: 30px;
-        border-radius: 18px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.10);
-    }
-    h1 {
-        margin-top: 0;
-        text-align: center;
-        color: #075e54;
-    }
-    .sub {
-        text-align: center;
-        color: #666;
-        margin-bottom: 28px;
-        line-height: 1.6;
-    }
-    label {
-        display: block;
-        margin-top: 16px;
-        margin-bottom: 7px;
-        font-weight: bold;
-    }
-    input,
-    select,
-    textarea {
-        width: 100%;
-        padding: 12px 14px;
-        border: 1px solid #ccc;
-        border-radius: 9px;
-        font-size: 15px;
-        font-family: inherit;
-    }
-    input:focus,
-    select:focus,
-    textarea:focus {
-        outline: none;
-        border-color: #075e54;
-        box-shadow: 0 0 0 2px rgba(7,94,84,0.10);
-    }
-    textarea {
-        min-height: 130px;
-        resize: vertical;
-    }
-    .info {
-        background: #e8f5e9;
-        border-left: 4px solid #075e54;
-        padding: 12px 14px;
-        margin-bottom: 20px;
-        border-radius: 7px;
-        line-height: 1.5;
-        font-size: 14px;
-    }
-    button {
-        width: 100%;
-        margin-top: 25px;
-        padding: 14px;
-        border: none;
-        border-radius: 9px;
-        background: #075e54;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    button:hover {
-        background: #064e46;
-    }
-    button:disabled {
-        background: #999;
-        cursor: not-allowed;
-    }
-    #pesan {
-        margin-top: 18px;
-        text-align: center;
-        font-weight: bold;
-        min-height: 24px;
-    }
-    .success {
-        color: #087f5b;
-    }
-    .error {
-        color: #c62828;
-    }
-    .required {
-        color: red;
-    }
-    @media (max-width: 600px) {
-        .container {
-            margin: 20px auto;
-        }
-        .card {
-            padding: 22px;
-        }
-    }
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#e8f5e9,#f5fff6);color:#333;min-height:100vh}
+.container{width:min(94%,760px);margin:28px auto 50px}
+.back{display:inline-block;margin-bottom:18px;color:#075e54;text-decoration:none;font-weight:bold}
+.card{background:#fff;padding:28px;border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.10);margin-bottom:22px}
+h1,h2{color:#075e54;text-align:center}
+h1{margin:0 0 8px}.sub{text-align:center;color:#666;line-height:1.6;margin:0 auto 25px}
+.info{background:#e8f5e9;border-left:4px solid #075e54;padding:13px 15px;margin-bottom:20px;border-radius:7px;line-height:1.55;font-size:14px}
+label{display:block;margin-top:15px;margin-bottom:7px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid #ccc;border-radius:9px;font-size:15px;font-family:inherit}
+textarea{min-height:140px;resize:vertical}
+button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:9px;background:#075e54;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{background:#999;cursor:not-allowed}
+.required{color:red}.msg{margin-top:15px;text-align:center;font-weight:bold;line-height:1.5}.success{color:#087f5b}.error{color:#c62828}
+.status-card{display:none}.status-box{padding:16px;border-radius:10px;background:#f5f7f7;line-height:1.6}.badge{display:inline-block;padding:6px 11px;border-radius:20px;font-weight:bold;font-size:13px}.menunggu{background:#fff3cd;color:#856404}.ditanggapi{background:#dff5e9;color:#087f5b}.ditolak{background:#fde4e4;color:#c62828}
+.small{font-size:13px;color:#777}
+@media(max-width:600px){.container{margin-top:18px}.card{padding:22px}}
 </style>
 </head>
 <body>
 <div class="container">
 <a href="index.html" class="back">← Kembali ke Website</a>
+
 <div class="card">
-    <h1>📝 Kirim Data Desa</h1>
-    <p class="sub">
-        Silakan bantu melengkapi informasi Desa Sepinggan Gelik
-        dengan mengirimkan data, kegiatan, keindahan, atau informasi
-        lainnya.
-    </p>
-    <div class="info">
-        <strong>ℹ️ Informasi:</strong><br>
-        Data yang kamu kirim akan langsung masuk ke database
-        Desa Sepinggan Gelik dan dapat ditampilkan pada website.
-    </div>
-    <form id="formData">
-        <label for="nama">
-            Nama <span class="required">*</span>
-        </label>
-        <input
-            type="text"
-            id="nama"
-            name="nama"
-            placeholder="Masukkan nama"
-            maxlength="100"
-            required
-        >
-        <label for="judul">
-            Judul <span class="required">*</span>
-        </label>
-        <input
-            type="text"
-            id="judul"
-            name="judul"
-            placeholder="Contoh: Kegiatan Gotong Royong Desa"
-            maxlength="150"
-            required
-        >
-        <label for="kategori">
-            Kategori <span class="required">*</span>
-        </label>
-        <select id="kategori" name="kategori" required>
-            <option value="">
-                -- Pilih Kategori --
-            </option>
-            <option value="Beranda">
-                Beranda
-            </option>
-            <option value="Profil Desa">
-                Profil Desa
-            </option>
-            <option value="Keindahan">
-                Keindahan
-            </option>
-            <option value="Kegiatan">
-                Kegiatan
-            </option>
-            <option value="Lokasi">
-                Lokasi
-            </option>
-        </select>
-        <label for="deskripsi">
-            Deskripsi <span class="required">*</span>
-        </label>
-        <textarea
-            id="deskripsi"
-            name="deskripsi"
-            placeholder="Tuliskan informasi atau cerita tentang data tersebut..."
-            maxlength="1000"
-            required
-        ></textarea>
-        <label for="urlGambar">
-            URL Gambar
-        </label>
-        <input
-            type="url"
-            id="urlGambar"
-            name="urlGambar"
-            placeholder="https://contoh.com/foto.jpg"
-        >
-        <label for="tanggal">
-            Tanggal
-        </label>
-        <input
-            type="date"
-            id="tanggal"
-            name="tanggal"
-        >
-        <button type="submit" id="btnKirim">
-            📤 Kirim Data
-        </button>
-        <div id="pesan"></div>
-    </form>
+<h1>📢 Pengaduan Masyarakat</h1>
+<p class="sub">Sampaikan keluhan, laporan, atau masalah yang terjadi di lingkungan Desa Sepinggan Gelik.</p>
+<div class="info"><strong>ℹ️ Cara kerja:</strong><br>Isi pengaduan dengan jelas. Setelah dikirim, kamu akan mendapatkan <strong>ID Pengaduan</strong>. Simpan ID tersebut untuk melihat tanggapan admin.</div>
+
+<form id="formPengaduan">
+<label>Nama <span class="required">*</span></label>
+<input id="nama" maxlength="100" placeholder="Masukkan nama" required>
+
+<label>No. HP <span class="required">*</span></label>
+<input id="noHp" type="tel" maxlength="20" placeholder="Contoh: 08xxxxxxxxxx" required>
+
+<label>Kategori Pengaduan <span class="required">*</span></label>
+<select id="kategori" required>
+<option value="">-- Pilih Kategori --</option>
+<option>Infrastruktur / Jalan</option>
+<option>Kebersihan / Lingkungan</option>
+<option>Keamanan</option>
+<option>Pelayanan Desa</option>
+<option>Sosial / Masyarakat</option>
+<option>Fasilitas Umum</option>
+<option>Lainnya</option>
+</select>
+
+<label>Judul Pengaduan <span class="required">*</span></label>
+<input id="judul" maxlength="150" placeholder="Contoh: Jalan rusak di RT 03" required>
+
+<label>Isi Pengaduan <span class="required">*</span></label>
+<textarea id="isi" maxlength="2000" placeholder="Jelaskan pengaduan secara jelas..." required></textarea>
+
+<button type="submit" id="btnKirim">📤 Kirim Pengaduan</button>
+<div id="pesan" class="msg"></div>
+</form>
+</div>
+
+<div class="card">
+<h2>🔎 Cek Status Pengaduan</h2>
+<p class="sub">Masukkan ID pengaduan yang kamu dapat setelah mengirim laporan.</p>
+<form id="formCek">
+<input id="cekId" placeholder="Contoh: PGD-20260917-001" required>
+<button type="submit" id="btnCek">🔍 Cek Pengaduan</button>
+</form>
+<div id="hasilStatus" class="status-card"></div>
 </div>
 </div>
+
+<script src="config.js"></script>
 <script>
-/* =====================================================
-   URL GOOGLE APPS SCRIPT
-===================================================== */
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbzN1j6Bhyy8_RZTvsK-aPzVNxKlG0JPtqLNzhJueziXDvt0isxag3VrTkiwtzxn1fU/exec";
-/* =====================================================
-   FORM KIRIM DATA
-===================================================== */
-const form =
-    document.getElementById("formData");
-const tombol =
-    document.getElementById("btnKirim");
-const pesan =
-    document.getElementById("pesan");
-form.addEventListener("submit", async function(event) {
-    event.preventDefault();
-    tombol.disabled = true;
-    tombol.textContent = "⏳ Mengirim...";
-    pesan.textContent = "";
-    pesan.className = "";
-    const nama =
-        document.getElementById("nama").value.trim();
-    const judul =
-        document.getElementById("judul").value.trim();
-    const kategori =
-        document.getElementById("kategori").value;
-    const deskripsi =
-        document.getElementById("deskripsi").value.trim();
-    const urlGambar =
-        document.getElementById("urlGambar").value.trim();
-    const tanggal =
-        document.getElementById("tanggal").value;
-    if (!nama || !judul || !kategori || !deskripsi) {
-        pesan.textContent =
-            "⚠️ Silakan lengkapi semua data yang wajib diisi.";
-        pesan.className = "error";
-        tombol.disabled = false;
-        tombol.textContent = "📤 Kirim Data";
-        return;
-    }
-    try {
-        const params = new URLSearchParams();
-        params.append("action", "submit");
-        params.append("nama", nama);
-        params.append("judul", judul);
-        params.append("kategori", kategori);
-        params.append("deskripsi", deskripsi);
-        params.append("urlGambar", urlGambar);
-        params.append("tanggal", tanggal);
-        const response = await fetch(
-            WEB_APP_URL + "?" + params.toString()
-        );
-        const result =
-            await response.json();
-        if (
-            result &&
-            result.success === true
-        ) {
-            pesan.textContent =
-                "✅ Data berhasil dikirim dan langsung masuk ke database.";
-            pesan.className = "success";
-            form.reset();
-        } else {
-            throw new Error(
-                result && result.message
-                    ? result.message
-                    : "Data gagal dikirim."
-            );
-        }
-    } catch (error) {
-        console.error(error);
-        pesan.textContent =
-            "❌ Data gagal dikirim. Silakan coba lagi.";
-        pesan.className = "error";
-    }
-    tombol.disabled = false;
-    tombol.textContent = "📤 Kirim Data";
+const API=typeof WEB_APP_URL!=="undefined"?WEB_APP_URL:"";
+const form=document.getElementById("formPengaduan");
+const btn=document.getElementById("btnKirim");
+const pesan=document.getElementById("pesan");
+
+form.addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!API){pesan.textContent="❌ URL database belum tersedia.";pesan.className="msg error";return}
+ btn.disabled=true;btn.textContent="⏳ Mengirim...";
+ pesan.textContent="";
+ try{
+  const p=new URLSearchParams({action:"submitPengaduan",nama:nama.value.trim(),noHp:noHp.value.trim(),kategori:kategori.value,judul:judul.value.trim(),isi:isi.value.trim()});
+  const r=await fetch(API+"?"+p.toString()); const x=await r.json();
+  if(!x.success) throw new Error(x.message||"Pengaduan gagal dikirim.");
+  pesan.innerHTML="✅ Pengaduan berhasil dikirim.<br><strong>ID Pengaduan: "+escapeHtml(x.id)+"</strong><br><span class='small'>Simpan ID ini untuk mengecek status.</span>";
+  pesan.className="msg success"; form.reset();
+ }catch(err){pesan.textContent="❌ "+err.message;pesan.className="msg error"}
+ btn.disabled=false;btn.textContent="📤 Kirim Pengaduan";
 });
+
+document.getElementById("formCek").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const out=document.getElementById("hasilStatus"), b=document.getElementById("btnCek");
+ if(!API){out.style.display="block";out.innerHTML="<div class='status-box'>URL database belum tersedia.</div>";return}
+ b.disabled=true;b.textContent="⏳ Mengecek...";
+ try{
+  const id=document.getElementById("cekId").value.trim();
+  const r=await fetch(API+"?action=cekPengaduan&id="+encodeURIComponent(id)); const x=await r.json();
+  if(!x.success) throw new Error(x.message||"Pengaduan tidak ditemukan.");
+  const d=x.data||{};
+  const cls=d.status==="Ditanggapi"?"ditanggapi":d.status==="Ditolak"?"ditolak":"menunggu";
+  out.style.display="block";
+  out.innerHTML="<div class='status-box'><strong>ID:</strong> "+escapeHtml(d.id)+"<br><strong>Judul:</strong> "+escapeHtml(d.judul)+"<br><strong>Status:</strong> <span class='badge "+cls+"'>"+escapeHtml(d.status)+"</span><br><br><strong>Tanggapan Admin:</strong><br>"+(d.tanggapan?escapeHtml(d.tanggapan):"<span class='small'>Belum ada tanggapan dari admin.</span>")+"</div>";
+ }catch(err){out.style.display="block";out.innerHTML="<div class='status-box error'>❌ "+escapeHtml(err.message)+"</div>"}
+ b.disabled=false;b.textContent="🔍 Cek Pengaduan";
+});
+function escapeHtml(v){return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
 </script>
 </body>
 </html>
